@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.egk.activites.LeaderBoard">
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/backcolor">
+        <ImageView
+            android:id="@+id/gk_backicon"
+            android:layout_width="25dp"
+            android:layout_height="50dp"
+            android:src="@drawable/backicon"
+            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycle_leader"
+        android:layout_below="@+id/relative"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="backcolor">#FFFFFF</color>
+    <color name="hint_color">#AFD2E6</color>
+    <color name="textcol">#667F97</color>
+    <color name="textcolb">#a1b3c4</color>
+    <color name="quiztextcol">#ffffff</color>
+    <color name="blackcol">#000000</color>
+    <color name="grey">#D8D5D5</color>
+    <color name="placeholder_bg">#dddddd</color>
+    <color name="item_name">#0c0c0c</color>
+    <color name="description">#1a1a1a</color>
+    <color name="chef">#777</color>
+    <color name="white">#FFFFFF</color>
+    <color name="timestamp">#777</color>
+    <color name="skip">#6D6A6A</color>
+    <color name="blue">#3763F8</color>
+    <color name="backcolor1">#dde2a6</color>
+    <color name="black">#000000</color>
+    <color name="view_color">#C0BDBD</color>
+    <color name="colorview">#808080</color>
+    <color name="light_black">#808080</color>
+    <color name="light_grey">#E2DEDE</color>
+    <color name="icon_tint">#9C9797</color>
+    <color name="red">#FB6679</color>
+    <color name="green">#b0ed4e</color>
+    <color name="dark_green">#00BF59</color>
+    <color name="egk_blue">#0086FF</color>
+
+</resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view"
+
+
+    >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/navhome"
+            android:title="Home"
+            />
+
+        <item
+            android:id="@+id/nav_today"
+            android:icon="@drawable/navtoday"
+            android:title="Today's"
+   />
+        <item
+            android:id="@+id/nav_gk"
+            android:icon="@drawable/navgk"
+            android:title="GK"/>
+        <item
+            android:id="@+id/nav_monthly_gk"
+            android:icon="@drawable/navmonthlygk"
+            android:title="Monthly GK" />
+        <item
+            android:id="@+id/nav_test_paper"
+            android:icon="@drawable/navexampapers"
+            android:title="Exam Papers"/>
+        <item
+            android:id="@+id/nav_match_point"
+            android:icon="@drawable/navmatchpoint"
+            android:title="Match Point" />
+
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/navreport"
+            android:title="Report" />
+
+        <item
+            android:id="@+id/nav_glossary"
+            android:icon="@drawable/navglossary"
+            android:title="Glossary" />
+        <item
+            android:id="@+id/nav_eqkquiz"
+            android:icon="@drawable/navquiz"
+            android:title="eGK Quiz" />
+        <item
+            android:id="@+id/nav_offers"
+            android:icon="@drawable/navoffers"
+            android:title="Offers" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/navnotification"
+            android:title="Notification" />
+        <item
+            android:id="@+id/nav_topup"
+            android:icon="@drawable/navtopup"
+            android:title="Top Up" />
+        <item
+            android:id="@+id/nav_transactions"
+            android:icon="@drawable/navtransaction"
+            android:title="Transactions" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/navprofile"
+            android:title="Profile"
+            />
+
+        <item
+            android:id="@+id/nav_changepass"
+            android:icon="@drawable/navchangepass"
+            android:title="Change Password"
+           />
+
+
+    </group>
+
+    <item android:title="Communicate"
+        >
+
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share"
+               />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:visible="false"
+                android:title="Send" />
+            <item
+                android:id="@+id/nav_send_privacy"
+                android:icon="@drawable/gk_lock"
+                android:title="Privacy Policy"
+               />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout_dark"
+                android:title="Logout"
+               />
+        </menu>
+    </item>
+
+</menu>

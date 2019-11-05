@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.egk.fragment.GkItemCategory">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EAE6E5"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcy_gk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative"
+        android:layout_marginTop="@dimen/dimen_10dp">
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

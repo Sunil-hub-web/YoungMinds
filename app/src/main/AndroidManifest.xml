@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.egk.egk">
+
+    <application
+        android:name="com.egk.payumoney.BaseApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity android:name="com.egk.activites.GlosseryActivity"></activity>
+        <activity android:name="com.egk.activites.ReportActivity" />
+        <activity android:name="com.egk.activites.MonthlyActivity" />
+        <activity android:name="com.egk.activites.MatchPointActivity" />
+        <activity android:name="com.egk.activites.TodaysActivity" />
+        <activity android:name="com.egk.activites.GetStartedPage" />
+        <activity android:name="com.egk.activites.LeaderBoard" />
+        <activity android:name="com.egk.activites.QuestionAns_Activity" />
+        <activity android:name="com.egk.activites.ViewQuiz" />
+        <activity android:name=".ForgotOTP" />
+        <activity android:name=".ConfirmPassword" />
+        <activity android:name=".PrivacyPolicy" />
+        <activity android:name=".OTP" />
+        <activity android:name="com.egk.activites.ViewGk" />
+        <activity android:name="com.egk.activites.GkCategory" />
+        <activity android:name="com.egk.activites.ViewActivity" /> <!-- <meta-data -->
+        <!-- android:name="com.google.android.actions" -->
+        <!-- android:resource="@xml/network_security_config" /> -->
+        <activity android:name="com.egk.activites.Notification_item_atvty" />
+        <activity android:name="com.egk.activites.Offer_item_atvty" />
+        <activity android:name="com.egk.activites.Transaction_item_atvty" />
+        <activity android:name="com.egk.activites.Gk_item_atvty" />
+        <activity android:name=".Transaction" />
+        <activity android:name=".Offer_list" />
+        <activity android:name=".Notification_list" />
+        <activity android:name=".Gk_list" />
+        <activity android:name=".Forgot_Pswd" />
+        <activity android:name=".RegistrationPage" />
+        <activity
+            android:name=".Egk_nav"
+            android:label="@string/title_activity_egk_nav"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login" />
+        <activity android:name=".Splash_screen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

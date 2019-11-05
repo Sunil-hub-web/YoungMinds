@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="textsize">15dp</dimen>
+    <dimen name="layout_height">45dp</dimen>
+    <dimen name="padding_left">9dp</dimen>
+    <dimen name="margin_left">20dp</dimen>
+    <dimen name="margin_right">20dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">5dp</dimen>
+    <dimen name="nav_header_height">115dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="profiletextsize">16dp</dimen>
+    <dimen name="qiiztextsize">9dp</dimen>
+    <dimen name="viewqiiztextsize">12dp</dimen>
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="placeholder_image">50dp</dimen>
+    <dimen name="placeholder_text_height">8dp</dimen>
+    <dimen name="activity_padding_horizontal">16dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="name">15dp</dimen>
+    <dimen name="chef">12dp</dimen>
+    <dimen name="timestamp">11dp</dimen>
+    <dimen name="description">15dp</dimen>
+    <dimen name="price">13dp</dimen>
+    <dimen name="register_text">15dp</dimen>
+    <dimen name="design_navigation_icon_size" tools:override="true">20dp</dimen>
+
+
+</resources>

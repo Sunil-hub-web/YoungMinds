@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8EAEC"
+    tools:context="com.egk.activites.QuestionAns_Activity">
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/backcolor">
+        <ImageView
+            android:id="@+id/gk_backicon"
+            android:layout_width="25dp"
+            android:layout_height="50dp"
+            android:src="@drawable/backicon"
+            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            />
+    </RelativeLayout>
+
+    <include android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/icludeShimmer"
+        layout="@layout/quizshimmer"
+        android:layout_below="@+id/relative"
+        />
+
+
+
+    <RelativeLayout
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relative"
+        android:visibility="gone">
+
+
+ <TextView
+    android:id="@+id/txt_quest"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+     android:layout_marginTop="5dp"
+    android:background="@drawable/quizbox"
+     android:text=""
+     android:layout_alignParentLeft="true"
+     android:textStyle="bold"
+     android:paddingLeft="9dp"
+
+
+   />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:layout_below="@+id/txt_quest"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_btn1"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text=""
+            android:checked="false"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_btn2"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text=""
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_btn3"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text=""
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_btn4"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text=""
+            />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/btn_box"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:text="Submit"
+        android:textColor="#ffffff"
+        android:layout_centerInParent="true"
+        />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.egk.activites.GlosseryActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:background="@color/backcolor"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dimen_45dp">
+        <ImageView
+            android:id="@+id/gk_backicon"
+            android:layout_width="25dp"
+            android:layout_height="50dp"
+            android:src="@drawable/backicon"
+            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EAE6E5"
+        android:layout_below="@+id/relative"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/multiple_glossery_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/relative"/>
+</RelativeLayout>

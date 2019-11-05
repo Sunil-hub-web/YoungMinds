@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/backcolor">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/sign_logo"
+            android:layout_gravity="center"
+            android:src="@drawable/egk"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lgn_ll"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/user_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/user_logo"
+                android:tint="@color/view_color"
+                />
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/user_logo"
+                android:background="@color/transparent"
+                android:inputType="text"
+                android:textSize="@dimen/register_text"
+                android:hint="Enter Name"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_color"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/name_user_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/mobilee"
+                android:tint="@color/view_color"
+                />
+            <EditText
+                android:id="@+id/edt_mob_no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/name_user_logo"
+                android:background="@color/transparent"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textSize="@dimen/register_text"
+                android:hint="Enter Mobile Number"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_color"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/email_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/email_logo"
+                android:tint="@color/view_color"
+                />
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/email_logo"
+                android:background="@color/transparent"
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/register_text"
+                android:hint="Enter Email Address"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_color"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/password"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/passwrd"
+                android:tint="@color/view_color"
+                />
+            <EditText
+                android:id="@+id/edt_pswd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/password"
+                android:background="@color/transparent"
+                android:inputType="textPassword"
+                android:textSize="@dimen/register_text"
+                android:hint="Enter Password"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_color"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/cnf_password"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/passwrd"
+                android:tint="@color/view_color"
+                />
+            <EditText
+                android:id="@+id/edt_confirm_pswd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/cnf_password"
+                android:background="@color/transparent"
+                android:inputType="textPassword"
+                android:textSize="@dimen/register_text"
+                android:hint="Enter Confirm Password"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_color"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginLeft="@dimen/margin_left"/>
+
+
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimen_20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_sinin"
+            android:text="Already have an Account? Sign In"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dimen_40dp"
+            android:textColor="@color/blue"
+            android:textSize="13dp"
+            android:textStyle="bold"/>
+
+
+
+        <RelativeLayout
+        android:id="@+id/btn_signUp"
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_60dp"
+        android:background="@drawable/login_circlebox"
+          android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/dimen_40dp"
+      >
+
+        <ImageView
+            android:layout_width="@dimen/dimen_25dp"
+            android:layout_height="@dimen/dimen_25dp"
+            android:src="@drawable/fowrward"
+            android:layout_centerInParent="true"
+            android:tint="@color/white"/>
+
+    </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

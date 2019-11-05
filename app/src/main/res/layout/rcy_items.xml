@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/coneimg"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/home_gk" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GK"
+            android:padding="6dp"
+            android:id="@+id/conetxt"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:fontFamily="sans-serif"/>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_columnWeight="1"-->
+        <!--android:orientation="vertical">-->
+        <!--<ImageView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:id="@+id/conetwoimg"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:src="@drawable/home_transactions"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Transactions"-->
+            <!--android:id="@+id/conetwotxt"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textStyle="bold"/>-->
+    <!--</LinearLayout>-->
+
+</RelativeLayout>

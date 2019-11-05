@@ -1,0 +1,202 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.egk.fragment.EgkQuiz">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EAE6E5"
+        />
+
+    <TextView
+        android:id="@+id/txt_sessoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Session is Over"
+        android:textStyle="bold"
+        android:textColor="@color/blackcol"
+        android:textSize="@dimen/dimen_15dp"
+        android:visibility="gone"
+        android:gravity="center"/>
+   <RelativeLayout
+       android:id="@+id/quizlayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      >
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/img_books"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/grey"
+      />
+
+    <TextView
+        android:id="@+id/competationName"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:text=""
+        android:textSize="@dimen/dimen_17sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/blackcol"
+        android:background="#80FDF9F9"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="#80FDF9F9"
+        android:layout_below="@+id/competationName">
+    <TextView
+        android:id="@+id/prizedate"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="FINAL RESULT"
+        android:textSize="@dimen/dimen_17sp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:textColor="@color/blackcol"
+        android:gravity="end"
+
+        />
+    <TextView
+        android:id="@+id/date_val"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=""
+        android:textSize="@dimen/dimen_17sp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:textColor="@color/blackcol"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_below="@+id/img_books"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_2dp"
+        android:background="#585858">
+    <TextView
+        android:id="@+id/txt_myscore"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:text="MY SCORE:"
+        android:layout_marginLeft="120dp"
+        android:textStyle="bold"
+       />
+        <TextView
+            android:id="@+id/score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/txt_myscore"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+
+
+           />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/session_linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_below="@+id/relative"
+        android:layout_margin="8dp"
+        android:background="@drawable/quizbox"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/next_session"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Next Sesion:"
+                android:textColor="@color/blackcol"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/session_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/next_session"
+                android:textColor="@color/blackcol"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:text=""
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_2dp">
+
+            <TextView
+                android:id="@+id/date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date &amp; Time:"
+                android:textColor="@color/blackcol"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/date_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/date_time"
+                android:text=""
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:textColor="@color/blackcol"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/timeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/date_time_value"
+                android:text=""
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:textColor="@color/blackcol"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+    android:id="@+id/txt_leader"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_50dp"
+    android:layout_alignParentBottom="true"
+    android:text="SEE THE FULL LEADERBOARD"
+    android:gravity="center"
+    android:textColor="#056F79"
+    android:background="#C4C4C2"
+    android:textStyle="bold"/>
+
+   </RelativeLayout>
+   </RelativeLayout>
+
