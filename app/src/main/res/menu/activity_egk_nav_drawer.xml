@@ -21,21 +21,23 @@
             android:title="Today's"
    />
         <item
-            android:id="@+id/nav_gk"
-            android:icon="@drawable/navgk"
-            android:title="GK"/>
-        <item
             android:id="@+id/nav_monthly_gk"
             android:icon="@drawable/navmonthlygk"
             android:title="Monthly GK" />
         <item
-            android:id="@+id/nav_test_paper"
-            android:icon="@drawable/navexampapers"
-            android:title="Exam Papers"/>
+            android:id="@+id/nav_gk"
+            android:icon="@drawable/navgk"
+            android:title="GK"/>
+
+
         <item
             android:id="@+id/nav_match_point"
             android:icon="@drawable/navmatchpoint"
             android:title="Match Point" />
+        <item
+            android:id="@+id/nav_glossary"
+            android:icon="@drawable/navglossary"
+            android:title="Glossary" />
 
         <item
             android:id="@+id/nav_report"
@@ -43,9 +45,9 @@
             android:title="Report" />
 
         <item
-            android:id="@+id/nav_glossary"
-            android:icon="@drawable/navglossary"
-            android:title="Glossary" />
+            android:id="@+id/nav_test_paper"
+            android:icon="@drawable/navexampapers"
+            android:title="Exam Papers"/>
         <item
             android:id="@+id/nav_eqkquiz"
             android:icon="@drawable/navquiz"
@@ -59,13 +61,14 @@
             android:icon="@drawable/navnotification"
             android:title="Notification" />
         <item
-            android:id="@+id/nav_topup"
-            android:icon="@drawable/navtopup"
-            android:title="Top Up" />
-        <item
             android:id="@+id/nav_transactions"
             android:icon="@drawable/navtransaction"
             android:title="Transactions" />
+        <item
+            android:id="@+id/nav_topup"
+            android:icon="@drawable/navtopup"
+            android:title="Top Up" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/navprofile"

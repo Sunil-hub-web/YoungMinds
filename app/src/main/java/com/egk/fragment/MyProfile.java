@@ -199,6 +199,7 @@ public class MyProfile extends Fragment {
         save_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 edtprofile_icon_img.setVisibility(View.GONE);
 
                 if (name.getText().length() == 0) {

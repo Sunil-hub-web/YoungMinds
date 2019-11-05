@@ -29,31 +29,40 @@ public class HomeFragment extends Fragment {
 
     int[] icons = {
             R.drawable.todays,
-            R.drawable.gk,
             R.drawable.monthlygk,
-            R.drawable.exampapers,
+            R.drawable.gk,
+
+
             R.drawable.matchpoint,
-            R.drawable.report,
             R.drawable.glossary,
+            R.drawable.report,
+
+            R.drawable.exampapers,
             R.drawable.quiz,
             R.drawable.offers,
+
             R.drawable.notification,
-            R.drawable.topup,
-            R.drawable.transaction
+            R.drawable.transaction,
+            R.drawable.topup
+
     };
     String[] names = {
             "Today's",
-            "GK",
             "Monthly GK",
-            "Exam Paper",
+            "GK",
+
             "Match Point",
-            "Report",
             "Glossary",
+            "Report",
+
+            "Exam Paper",
             "Quiz",
             "Offers",
+
             "Notification",
-            "Top Up",
-            "Transactions"
+            "Transactions",
+            "Top Up"
+
     };
 
     @Override
@@ -75,7 +84,6 @@ public class HomeFragment extends Fragment {
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             Fragment intent1 = null;
-
             @Override
             public void onClick(View view, int position) {
                 Log.e("mukesh", "" + position);
@@ -84,43 +92,44 @@ public class HomeFragment extends Fragment {
                     Fragment i = new Todays();
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     getFragmentValue(i);
-                }
-                else if (position == 1) {
-                    Egk_nav.headtitle.setText(" GK");
-                    Fragment i = new GkItemCategory();
-                    Egk_nav.egk_logo.setVisibility(View.GONE);
-                    getFragmentValue(i);
-
-
-                }else if (position == 2) {
+                }else if (position == 1) {
                     Egk_nav.headtitle.setText("Monthly GK");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment l = new MonthlyGk();
                     getFragmentValue(l);
 
                 }
-                else if (position == 3) {
-                    Egk_nav.headtitle.setText("Exam Papers");
-                    Fragment o = new PreviousTestPAper_Fragment();
+                else if (position == 2) {
+                    Egk_nav.headtitle.setText(" GK");
+                    Fragment i = new GkItemCategory();
                     Egk_nav.egk_logo.setVisibility(View.GONE);
-                    getFragmentValue(o);
-                }else if (position == 4) {
+                    getFragmentValue(i);
+
+
+                }
+               else if (position == 3) {
                     Egk_nav.headtitle.setText("Match Point");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment k = new MatchPoint();
                     getFragmentValue(k);
-                }else if (position == 5) {
-                    Egk_nav.headtitle.setText("Report");
-                    Egk_nav.egk_logo.setVisibility(View.GONE);
-                    Fragment l = new Report();
-                    getFragmentValue(l);
-
-                }else if (position == 6) {
+                }else if (position == 4) {
                     Egk_nav.headtitle.setText("Glossary");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment l = new Glossary();
                     getFragmentValue(l);
 
+                }
+                else if (position == 5) {
+                    Egk_nav.headtitle.setText("Report");
+                    Egk_nav.egk_logo.setVisibility(View.GONE);
+                    Fragment l = new Report();
+                    getFragmentValue(l);
+
+                } else if (position == 6) {
+                    Egk_nav.headtitle.setText("Exam Papers");
+                    Fragment o = new PreviousTestPAper_Fragment();
+                    Egk_nav.egk_logo.setVisibility(View.GONE);
+                    getFragmentValue(o);
                 }
                 else if(position == 7){
                     Egk_nav.headtitle.setText("Egk Quiz");
@@ -140,22 +149,20 @@ public class HomeFragment extends Fragment {
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment n = new My_Notifications();
                     getFragmentValue(n);
-                } else if (position == 10) {
+                }else if (position == 10) {
+                    Egk_nav.headtitle.setText("Transactions");
+                    Egk_nav.egk_logo.setVisibility(View.GONE);
+                    Fragment j = new My_Transaction();
+                    getFragmentValue(j);
+
+                }
+                else if (position == 11) {
                     Egk_nav.headtitle.setText("Top Up");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment l = new My_Topup();
                     getFragmentValue(l);
 
                 }
-                else if (position == 11) {
-                    Egk_nav.headtitle.setText("My Transactions");
-                    Egk_nav.egk_logo.setVisibility(View.GONE);
-                    Fragment j = new My_Transaction();
-                    getFragmentValue(j);
-
-                }
-
-
                 if (intent1 != null) {
 
                     getFragmentValue(intent1);

@@ -293,7 +293,7 @@ public class Egk_nav extends AppCompatActivity
             fragment = new MatchPoint();
         }
         else if (id == R.id.nav_transactions) {
-            headtitle.setText("My Transactions");
+            headtitle.setText("Transactions");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Transaction();
         }

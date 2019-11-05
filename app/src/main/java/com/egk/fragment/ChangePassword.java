@@ -69,7 +69,7 @@ public class ChangePassword extends Fragment {
 
                 }else {
 
-                    GetchangePartnerPassword();
+                    Changepass();
 
                 }
 
@@ -79,7 +79,7 @@ public class ChangePassword extends Fragment {
         return v;
     }
 
-    public  void GetchangePartnerPassword(){
+    public  void Changepass(){
 
         String a = "{\"u_id\":\"";
         String b = "\",\"old_password\":\"";
@@ -113,6 +113,9 @@ public class ChangePassword extends Fragment {
                                 Toast.makeText(getActivity(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
                                 sessionManager.logoutUser();
 
+                            }else if (statuse.equalsIgnoreCase("false")){
+                                String message=jsonObjMain.getString("msg");
+                                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                             }
                         }
                         catch (Exception r){
