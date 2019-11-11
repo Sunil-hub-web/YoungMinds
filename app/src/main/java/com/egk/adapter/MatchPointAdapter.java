@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.egk.egk.R;
 import com.egk.gettersetter.MatchPointGetSet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MatchPointAdapter extends RecyclerView.Adapter<MatchPointAdapter.MyViewHolder>  {
     private ArrayList<MatchPointGetSet> matchPointGetSets;
@@ -31,7 +34,22 @@ public class MatchPointAdapter extends RecyclerView.Adapter<MatchPointAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         final MatchPointGetSet My_list =matchPointGetSets.get(i);
-        myViewHolder.txt_datt.setText("Date : "+My_list.getMatch_date());
+
+        String strCurrentDate = My_list.getMatch_date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = null;
+        try {
+            newDate = format.parse(strCurrentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        format = new SimpleDateFormat("dd-MM-yyyy");
+        String dt = format.format(newDate);
+
+//        holder.date.setText("  -  "+dt);
+
+        myViewHolder.txt_datt.setText("Date : "+dt);
     }
 
     @Override

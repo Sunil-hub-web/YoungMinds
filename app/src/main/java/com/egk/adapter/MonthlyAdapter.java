@@ -32,7 +32,7 @@ public class MonthlyAdapter extends RecyclerView.Adapter<MonthlyAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MonthlyAdapter.MyViewHolder myViewHolder, int i) {
         final MontlyGetSet My_list =montlyGetSets.get(i);
-        myViewHolder.txt_month.setText(My_list.getMonthly_gk_date());
+        myViewHolder.txt_month.setText("Month : "+My_list.getMonthly_gk_date());
     }
 
     @Override

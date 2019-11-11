@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:text="Select Category"
                 android:gravity="center"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/dark_green"
                 />
         </android.support.v7.widget.CardView>
 

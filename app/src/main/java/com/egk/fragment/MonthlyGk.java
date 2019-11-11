@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.egk.activites.MatchPointActivity;
+import com.egk.activites.MonthlyActivity;
 import com.egk.adapter.MatchPointAdapter;
 import com.egk.adapter.MonthlyAdapter;
 import com.egk.egk.R;
@@ -59,7 +60,7 @@ public class MonthlyGk extends Fragment {
                 MontlyGetSet itemname = montlyGet.get(position);
 
 
-                Intent i = new Intent(getActivity(), MatchPointActivity.class);
+                Intent i = new Intent(getActivity(), MonthlyActivity.class);
                 i.putExtra("id",itemname.getMonthly_gk_id());
                 i.putExtra("desc",itemname.getDescription());
                 i.putExtra("date",itemname.getMonthly_gk_date());
@@ -81,7 +82,7 @@ public class MonthlyGk extends Fragment {
 
     public void getMonthlyData() {
 
-        String url = "https://egknow.com/Web_Service/web_service.php?method=getsMonthlyGk";
+        String url = "https://egknow.com/service-web/webservice.php?method=getsMonthlyGk";
 
         progressDialog.showDialog();
 
@@ -112,6 +113,7 @@ public class MonthlyGk extends Fragment {
 
                                     montlyGet.add(new MontlyGetSet(monthly_gk_id, monthly_gk_date,description));
                                 }
+
 
                                 MonthlyAdapter adapter = new MonthlyAdapter(montlyGet, getActivity());
                                 recyclerView.setHasFixedSize(true);
@@ -152,4 +154,5 @@ public class MonthlyGk extends Fragment {
 
 
     }
+
 }

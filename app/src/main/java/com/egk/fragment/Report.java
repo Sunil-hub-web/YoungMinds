@@ -79,7 +79,7 @@ public class Report extends Fragment {
     }
     public void getReportData() {
 
-        String url = "https://egknow.com/Web_Service/web_service.php?method=getsREports";
+        String url = "https://egknow.com/service-web/webservice.php?method=getsREports";
 
         progressDialog.showDialog();
 

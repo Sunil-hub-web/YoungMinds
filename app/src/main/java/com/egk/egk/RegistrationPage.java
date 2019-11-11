@@ -78,7 +78,11 @@ public class RegistrationPage extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
 
-                } else if (!edt_email.getText().toString().matches(emailpattern)) {
+                } else if (isValidPhoneNumber(edt_mob_no.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (!edt_email.getText().toString().matches(emailpattern)) {
                     Toast.makeText(RegistrationPage.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
                 }
                 else  if (edt_pswd.getText().length() == 0) {
@@ -189,33 +193,19 @@ public class RegistrationPage extends AppCompatActivity {
     }
 
 
-    public static boolean isEmailValid(String email) {
-        boolean isValid = false;
-
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        CharSequence inputStr = email;
-
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-        if (matcher.matches()) {
-            isValid = true;
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
-        return isValid;
     }
 
-    public static boolean isValidMobile(String phone) {
-        boolean check = false;
-        if (!Pattern.matches("[a-zA-Z]+", phone)) {
-            if (phone.length() < 9 || phone.length() > 13) {
-                // if(phone.length() != 10) {
-                check = false;
-                // txtPhone.setError("Not Valid Number");
-            } else {
-                check = android.util.Patterns.PHONE.matcher(phone).matches();
-            }
+    public static final boolean isValidPhoneNumber(CharSequence target) {
+        if (target.length()!=10) {
+            return false;
         } else {
-            check = false;
+            return android.util.Patterns.PHONE.matcher(target).matches();
         }
-        return check;
     }
 }

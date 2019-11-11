@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.egk.adapter.Notification_Adapter;
 import com.egk.egk.Notification_recy_list;
@@ -49,26 +50,27 @@ public class My_Notifications extends Fragment {
         progressDialog = new ViewDialog(getActivity());
 
 
-        getOfferDetails();
+        getNotification();
         return v;
     }
 
-    public void getOfferDetails() {
-        String a = "{\"category_id\":\"";
+    public void getNotification() {
+
+//        String a = "{\"category_id\":\"";
 //        String b = "\",\"password\":\"";
-        String c = "\"}";
+//        String c = "\"}";
         String url = "https://egknow.com/service-web/webservice.php?method=getUserNotificationList";
 
         progressDialog.showDialog();
 
-        Log.d("Receive", url);
+        Log.d("notification", url);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Ranjeetregister", response.toString());
+                        Log.d("notificationresponse", response.toString());
                         String REsult = response.toString();
                         //    pDialog.dismiss();
                         progressDialog.hideDialog();
@@ -85,12 +87,15 @@ public class My_Notifications extends Fragment {
                                 String offerDDesc = jsonSubJson.getString("notification_desc");
 
                                 NotificationArraylist.add(new Notification_recy_list(offerid, offerDDesc));
-                            }
+//                                Collections.sort(NotificationArraylist, Collections.reverseOrder());
 
+                            }
+//                            Collections.reverse(NotificationArraylist);
                             Notification_Adapter adapter = new Notification_Adapter(NotificationArraylist, My_Notifications.this);
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             recyclerView.setAdapter(adapter);
+
 
 
                         } catch (Exception r) {

@@ -1,13 +1,26 @@
 package com.egk.activites;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,11 +29,13 @@ import com.egk.egk.Egk_nav;
 import com.egk.egk.R;
 import com.egk.fragment.My_Notifications;
 
-public class ViewGk extends AppCompatActivity {
+public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
 
     TextView title, description, categoryname, date, head;
     String descriptionvalue,titlevalue,titlehead,catname;
     ImageView notification;
+    private final static String TAG = "TestImageGetter";
+    String source = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +46,7 @@ public class ViewGk extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         titlehead=getIntent().getStringExtra("catname");
-        descriptionvalue= getIntent().getStringExtra("description");
+//        descriptionvalue= getIntent().getStringExtra("description");
         titlevalue=getIntent().getStringExtra("title");
         catname=getIntent().getStringExtra("catname");
 
@@ -66,7 +81,7 @@ public class ViewGk extends AppCompatActivity {
 
         title.setText(removeHtml(titlevalue));
         head.setText(removeHtml(titlehead));
-        description.setText(removeHtml(descriptionvalue));
+//        description.setText(removeHtml(descriptionvalue));
         categoryname.setText(removeHtml(catname));
 
         String strCurrentDate = getIntent().getStringExtra("date");
@@ -84,6 +99,11 @@ public class ViewGk extends AppCompatActivity {
 //        holder.date.setText("  -  "+dt);
 
         date.setText("Date : "+dt);
+
+
+        source = getIntent().getStringExtra("description");
+        Spanned spanned = Html.fromHtml(source, this, null);
+        description.setText(spanned);
     }
 
 
@@ -107,6 +127,61 @@ public class ViewGk extends AppCompatActivity {
 
 
         return html;
+    }
+
+
+    @Override
+    public Drawable getDrawable(String source) {
+        LevelListDrawable d = new LevelListDrawable();
+        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
+        d.addLevel(0, 0, empty);
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+        new LoadImage().execute(source, d);
+
+        return d;
+    }
+
+    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+
+        private LevelListDrawable mDrawable;
+
+        @Override
+        protected Bitmap doInBackground(Object... params) {
+            String source = (String) params[0];
+            mDrawable = (LevelListDrawable) params[1];
+            Log.d(TAG, "doInBackground " + source);
+            try {
+                InputStream is = new URL(source).openStream();
+                return BitmapFactory.decodeStream(is);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.d("rgvc", String.valueOf(e));
+            } catch (MalformedURLException e) {
+                Log.d("rgvc", String.valueOf(e));
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d("rgvc", String.valueOf(e));
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            Log.d(TAG, "onPostExecute drawable " + mDrawable);
+            Log.d(TAG, "onPostExecute bitmap " + bitmap);
+            if (bitmap != null) {
+                BitmapDrawable d = new BitmapDrawable(bitmap);
+                mDrawable.addLevel(1, 1, d);
+                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                mDrawable.setLevel(1);
+                // i don't know yet a better way to refresh TextView
+                // mTv.invalidate() doesn't work as expected
+                CharSequence t = description.getText();
+                description.setText(t);
+            }
+        }
     }
 
 

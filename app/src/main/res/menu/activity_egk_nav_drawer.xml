@@ -11,73 +11,73 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/navhome"
+            android:icon="@drawable/homenav"
             android:title="Home"
             />
 
         <item
             android:id="@+id/nav_today"
-            android:icon="@drawable/navtoday"
+            android:icon="@drawable/todaysnav"
             android:title="Today's"
    />
         <item
             android:id="@+id/nav_monthly_gk"
-            android:icon="@drawable/navmonthlygk"
+            android:icon="@drawable/monthlynav"
             android:title="Monthly GK" />
         <item
             android:id="@+id/nav_gk"
-            android:icon="@drawable/navgk"
-            android:title="GK"/>
+            android:icon="@drawable/gknav"
+            android:title="Category GK"/>
 
 
         <item
             android:id="@+id/nav_match_point"
-            android:icon="@drawable/navmatchpoint"
+            android:icon="@drawable/matchpointnav"
             android:title="Match Point" />
         <item
             android:id="@+id/nav_glossary"
-            android:icon="@drawable/navglossary"
+            android:icon="@drawable/glosserynav"
             android:title="Glossary" />
 
         <item
             android:id="@+id/nav_report"
-            android:icon="@drawable/navreport"
+            android:icon="@drawable/reportnav"
             android:title="Report" />
 
         <item
             android:id="@+id/nav_test_paper"
-            android:icon="@drawable/navexampapers"
-            android:title="Exam Papers"/>
+            android:icon="@drawable/samplepapernav"
+            android:title="Sample Papers"/>
         <item
             android:id="@+id/nav_eqkquiz"
-            android:icon="@drawable/navquiz"
+            android:icon="@drawable/quiznav"
             android:title="eGK Quiz" />
         <item
             android:id="@+id/nav_offers"
-            android:icon="@drawable/navoffers"
+            android:icon="@drawable/offersnav"
             android:title="Offers" />
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/navnotification"
+            android:icon="@drawable/notificationnav"
             android:title="Notification" />
         <item
             android:id="@+id/nav_transactions"
-            android:icon="@drawable/navtransaction"
+            android:icon="@drawable/transactionnav"
             android:title="Transactions" />
         <item
             android:id="@+id/nav_topup"
-            android:icon="@drawable/navtopup"
+            android:icon="@drawable/topupnav"
             android:title="Top Up" />
 
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/navprofile"
+            android:icon="@drawable/profilenav"
             android:title="Profile"
             />
 
         <item
             android:id="@+id/nav_changepass"
-            android:icon="@drawable/navchangepass"
+            android:icon="@drawable/passwordnav"
             android:title="Change Password"
            />
 

@@ -29,5 +29,6 @@
     <color name="green">#b0ed4e</color>
     <color name="dark_green">#00BF59</color>
     <color name="egk_blue">#0086FF</color>
+    <color name="nav_text">#535353</color>
 
 </resources>

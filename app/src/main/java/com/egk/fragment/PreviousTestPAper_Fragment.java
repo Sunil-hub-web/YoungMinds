@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -207,13 +209,15 @@ String catname,catId,currentyear;
                             String statuse = jsonObjMain.getString("success");
 
                             JSONArray jsonArray = jsonObjMain.getJSONArray("pastPaperList");
-                            for (int i = 0; i < jsonArray.length(); i++) {
+                            for (int i = 0; i <0; i++) {
 
                                 JSONObject jsonSubJson = jsonArray.getJSONObject(i);
                                 String testPaperId = jsonSubJson.getString("past_paper_id");
                                 String testPaperTitle = jsonSubJson.getString("past_paper_name");
                                 String testPaperDesc = jsonSubJson.getString("past_paper_desc");
                                 String source = "";
+
+
 
                                 testPaperArary.add(new TestPeperGetterSetter(testPaperId, testPaperTitle, testPaperDesc, source));
                             }

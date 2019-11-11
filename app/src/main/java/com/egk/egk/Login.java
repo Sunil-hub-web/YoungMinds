@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
                 if (edtl_email.getText().length()==0) {
                     Toast.makeText(Login.this, "Enter Phone Number", Toast.LENGTH_SHORT).show();
                 }else if (edtl_email.getText().length()!=10) {
-                    Toast.makeText(Login.this, "Enter valid Phone Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
                 } else if (edtl_pswd.getText().length() == 0) {
                     Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
                 } else {

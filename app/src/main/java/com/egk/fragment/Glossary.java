@@ -59,6 +59,7 @@ public class Glossary extends Fragment {
 
                 Intent i = new Intent(getActivity(), GlosseryActivity.class);
                 i.putExtra("id",itemname.getGlossary_category_id());
+                i.putExtra("name",itemname.getName());
                 startActivity(i);
 
             }

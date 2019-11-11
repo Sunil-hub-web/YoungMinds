@@ -34,6 +34,8 @@ public class TestPaperAdapter extends RecyclerView.Adapter<TestPaperAdapter.Prog
         final TestPeperGetterSetter My_list =maarylis.get(Position);
         holder.not_txt.setText(removeHtml(My_list.getTestPaperTitle()));
 
+
+
     }
 
     @Override

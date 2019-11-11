@@ -2,11 +2,19 @@ package com.egk.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.egk.activites.TodaysActivity;
+import com.egk.activites.ViewActivity;
 import com.egk.activites.ViewGk;
 import com.egk.adapter.GktotalAdapter;
 import com.egk.adapter.TodaysAdapter;
@@ -36,7 +45,15 @@ import com.egk.gettersetter.TodaysGetSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 
 public class Todays extends Fragment {
@@ -45,6 +62,9 @@ RecyclerView recyclerView;
     ArrayList<TodaysGetSet> todaysGet = new ArrayList<TodaysGetSet>();
     ViewDialog progressDialog;
     private RecyclerView.LayoutManager layoutManager;
+    boolean your_date_is_outdated;
+    String source = "";
+    private final static String TAG = "TestImageGetter";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,13 +98,12 @@ RecyclerView recyclerView;
 //            }
 //        }));
 
-
         return v;
     }
 
     public void  getTodaysList(){
 
-        String url = "https://egknow.com/Web_Service/web_service.php?method=getsToday " ;
+        String url = "https://egknow.com/service-web/webservice.php?method=getsToday" ;
         Log.d("Todays", url);
 
         progressDialog.showDialog();
@@ -112,7 +131,6 @@ RecyclerView recyclerView;
                                     String todays_date = jsonSubJson.getString("todays_date");
                                     String description = jsonSubJson.getString("description");
 
-
                                     todaysGet.add(new TodaysGetSet(todays_id, todays_date, description));
                                 }
                                 TodaysAdapter adapter = new TodaysAdapter(todaysGet,getActivity());
@@ -120,13 +138,15 @@ RecyclerView recyclerView;
                                 layoutManager = new LinearLayoutManager(getActivity());
                                 recyclerView.setLayoutManager(layoutManager);
                                 recyclerView.setAdapter(adapter);
-                            }else {
+                            }else if (statuse.equalsIgnoreCase("false")){
+                                String err_msg=jsonObjMain.getString("err_msg");
+                                Toast.makeText(getActivity(), err_msg, Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (Exception r) {
                             progressDialog.hideDialog();
-                            Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
-                            Toast.makeText(getActivity(), "Successfully Logined", Toast.LENGTH_SHORT).show();
+                            Log.d("catcherro", "ranjeet Error" + r.toString());
+                            Toast.makeText(getActivity(), "Error in Catch", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -151,6 +171,7 @@ RecyclerView recyclerView;
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, url);
     }
+
 
 
 }

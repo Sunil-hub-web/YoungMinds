@@ -1,8 +1,11 @@
 package com.egk.gettersetter;
 
+import android.text.Spanned;
+
 public class TodaysGetSet {
 
     String todays_id,todays_date,description;
+
 
     public TodaysGetSet(String todays_id, String todays_date, String description) {
         this.todays_id = todays_id;

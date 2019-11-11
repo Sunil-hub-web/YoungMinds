@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.egk.adapter.Offer_Adapter;
 import com.egk.egk.Offer_recy_list;
@@ -86,14 +87,14 @@ public class My_Offers extends Fragment {
 
         progressDialog.showDialog();
 
-        Log.d("Receive", url);
+        Log.d("offers", url);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Ranjeetregister", response.toString());
+                        Log.d("offersresponse", response.toString());
                         String REsult = response.toString();
                         //    pDialog.dismiss();
                         progressDialog.hideDialog();
@@ -101,6 +102,7 @@ public class My_Offers extends Fragment {
                         try {
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
+
 
                             JSONArray jsonArray = jsonObjMain.getJSONArray("userOffersList");
                             for (int i = 0 ;i<jsonArray.length();i++) {
@@ -111,7 +113,7 @@ public class My_Offers extends Fragment {
 
                                 offedrArraylist.add(new Offer_recy_list(offerid, offerDDesc));
                             }
-
+//                            Collections.reverse(offedrArraylist);
                             Offer_Adapter adapter = new Offer_Adapter(offedrArraylist, My_Offers.this);
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

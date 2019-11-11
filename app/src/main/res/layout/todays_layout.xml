@@ -19,6 +19,9 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textSize="15dp"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+           android:fontFamily="sans-serif"
             android:textColor="@color/colorview"
             android:layout_marginLeft="5dp" />
 

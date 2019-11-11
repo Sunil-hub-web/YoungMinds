@@ -49,13 +49,13 @@ public class HomeFragment extends Fragment {
     String[] names = {
             "Today's",
             "Monthly GK",
-            "GK",
+            "Category GK",
 
             "Match Point",
             "Glossary",
             "Report",
 
-            "Exam Paper",
+            "Sample Papers",
             "Quiz",
             "Offers",
 
@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
 
                 }
                 else if (position == 2) {
-                    Egk_nav.headtitle.setText(" GK");
+                    Egk_nav.headtitle.setText("Category GK");
                     Fragment i = new GkItemCategory();
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     getFragmentValue(i);
@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment {
                     getFragmentValue(l);
 
                 } else if (position == 6) {
-                    Egk_nav.headtitle.setText("Exam Papers");
+                    Egk_nav.headtitle.setText("Sample Papers");
                     Fragment o = new PreviousTestPAper_Fragment();
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     getFragmentValue(o);
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
                     getFragmentValue(o);
                 }
                 else if (position == 8) {
-                    Egk_nav.headtitle.setText("My Offers");
+                    Egk_nav.headtitle.setText("Offers");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment m = new My_Offers();
                     getFragmentValue(m);

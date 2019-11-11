@@ -2,12 +2,20 @@ package com.egk.activites;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -39,16 +47,25 @@ import com.egk.gettersetter.MatchPointGetSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class GlosseryActivity extends AppCompatActivity {
+public class GlosseryActivity extends AppCompatActivity implements Html.ImageGetter{
 RecyclerView recyclerView;
     ViewDialog progressDialog;
     String catid;
     ArrayList<Glosserytittlegetset> glosserytittle= new ArrayList<Glosserytittlegetset>();
     Dialog dialogCoupon;
-    String gltittle,descrtipi;
+    String gltittle,descrtipi,name;
     ImageView gk_backicon;
+    TextView title;
+    private final static String TAG = "TestImageGetter";
+    String source = "";
+    TextView txt_tittle,txt_desc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +75,7 @@ RecyclerView recyclerView;
         recyclerView=(RecyclerView)findViewById(R.id.multiple_glossery_recycle);
         progressDialog=new ViewDialog(this);
         gk_backicon=(ImageView)findViewById(R.id.gk_backicon);
+        title=(TextView)findViewById(R.id.title);
 
         gk_backicon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +84,7 @@ RecyclerView recyclerView;
             }
         });
         catid=getIntent().getStringExtra("id");
+        title.setText(removeHtml(getIntent().getStringExtra("name")));
         Log.d("fkjn",catid);
 
         getGlosseryItems();
@@ -100,7 +119,7 @@ try {
     public void getGlosseryItems() {
         String a = "{\"Category_id\":\"";
         String b = "\"}";
-        String url = "https://egknow.com/Web_Service/web_service.php?method=getGllosory&data="+a+catid+ b;
+        String url = "https://egknow.com/service-web/webservice.php?method=getGllosory&data="+a+catid+ b;
 
         progressDialog.showDialog();
 
@@ -183,17 +202,20 @@ try {
 
 
 
-     TextView txt_tittle,txt_desc;
+
 
         txt_tittle=(TextView)dialogCoupon.findViewById(R.id.txt_tittle);
         txt_desc=(TextView)dialogCoupon.findViewById(R.id.txt_desc);
 
         txt_tittle.setText(gltittle);
-        txt_desc.setText(removeHtml(descrtipi));
-
+//        txt_desc.setText(removeHtml(descrtipi));
+//        source = getIntent().getStringExtra("description");
+        Spanned spanned = Html.fromHtml(descrtipi, this, null);
+        txt_desc.setText(spanned);
 
         dialogCoupon.show();
     }
+
     private String removeHtml(String html) {
         html = html.replaceAll("<(.*?)\\>"," ");
         html = html.replaceAll("<(.*?)\\\n"," ");
@@ -218,4 +240,59 @@ try {
 
         return html;
     }
+
+    @Override
+    public Drawable getDrawable(String source) {
+        LevelListDrawable d = new LevelListDrawable();
+        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
+        d.addLevel(0, 0, empty);
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+        new LoadImage().execute(source, d);
+
+        return d;
+    }
+
+    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+
+        private LevelListDrawable mDrawable;
+
+        @Override
+        protected Bitmap doInBackground(Object... params) {
+            String source = (String) params[0];
+            mDrawable = (LevelListDrawable) params[1];
+            Log.d(TAG, "doInBackground " + source);
+            try {
+                InputStream is = new URL(source).openStream();
+                return BitmapFactory.decodeStream(is);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.d("rgvc", String.valueOf(e));
+            } catch (MalformedURLException e) {
+                Log.d("rgvc", String.valueOf(e));
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d("rgvc", String.valueOf(e));
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            Log.d(TAG, "onPostExecute drawable " + mDrawable);
+            Log.d(TAG, "onPostExecute bitmap " + bitmap);
+            if (bitmap != null) {
+                BitmapDrawable d = new BitmapDrawable(bitmap);
+                mDrawable.addLevel(1, 1, d);
+                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                mDrawable.setLevel(1);
+                // i don't know yet a better way to refresh TextView
+                // mTv.invalidate() doesn't work as expected
+                CharSequence t = txt_desc.getText();
+                txt_desc.setText(t);
+            }
+        }
+    }
+
 }

@@ -58,6 +58,8 @@ public class Egk_nav extends AppCompatActivity
         sesion = new SessionManager(getApplicationContext());
         notification=(ImageView)findViewById(R.id.notification);
         egk_logo=(ImageView)findViewById(R.id.egk_logo);
+        headtitle = (TextView) findViewById(R.id.title);
+
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +85,7 @@ public class Egk_nav extends AppCompatActivity
         navigationView.setItemIconTintList(null);
 
 
-        headtitle = (TextView) findViewById(R.id.title) ;
+
 //        headtitle.setText("Home");
         TextView name = (TextView) hView.findViewById(R.id.nametext);
         name.setText(sesion.getUserName());
@@ -199,10 +201,6 @@ public class Egk_nav extends AppCompatActivity
             finish();
 
         }
-
-
-
-
         else if (exit) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
@@ -262,12 +260,12 @@ public class Egk_nav extends AppCompatActivity
             fragment = new Todays();
         }
         else if (id == R.id.nav_gk) {
-            headtitle.setText("GK");
+            headtitle.setText("Category GK");
             egk_logo.setVisibility(View.GONE);
             fragment = new GkItemCategory();
         }
         else if (id == R.id.nav_test_paper) {
-            headtitle.setText("Exam Papers");
+            headtitle.setText("Sample Papers");
             egk_logo.setVisibility(View.GONE);
             fragment = new PreviousTestPAper_Fragment();
 
@@ -298,24 +296,20 @@ public class Egk_nav extends AppCompatActivity
             fragment = new My_Transaction();
         }
          else if (id == R.id.nav_topup) {
-//            Toast.makeText(this, "Payment GAteway not Integrated", Toast.LENGTH_SHORT).show();
             headtitle.setText("Top Up");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Topup();
         } else if (id == R.id.nav_monthly_gk) {
-//            Toast.makeText(this, "Payment GAteway not Integrated", Toast.LENGTH_SHORT).show();
             headtitle.setText("Monthly GK");
             egk_logo.setVisibility(View.GONE);
             fragment = new MonthlyGk();
         }
         else if (id == R.id.nav_report) {
-//            Toast.makeText(this, "Payment GAteway not Integrated", Toast.LENGTH_SHORT).show();
             headtitle.setText("Report");
             egk_logo.setVisibility(View.GONE);
             fragment = new Report();
         }
         else if (id == R.id.nav_glossary) {
-//            Toast.makeText(this, "Payment GAteway not Integrated", Toast.LENGTH_SHORT).show();
             headtitle.setText("Glossary");
             egk_logo.setVisibility(View.GONE);
             fragment = new Glossary();
@@ -356,7 +350,6 @@ public class Egk_nav extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
 
     }
 

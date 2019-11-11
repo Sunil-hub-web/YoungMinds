@@ -26,8 +26,9 @@
             android:layout_height="@dimen/dimen_20dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:tint="@color/colorview"
-            android:src="@drawable/rightforward"/>
+            android:iconTint="@color/view_color"
+            android:src="@drawable/viewicon"
+            />
 
     </RelativeLayout>
     <View

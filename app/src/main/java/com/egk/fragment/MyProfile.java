@@ -70,6 +70,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class MyProfile extends Fragment {
+
     ImageView backicon,user_image,edtprofile_icon_img;
     EditText email,phone,name,city,occupation,address;
     TextView birthdate;
@@ -78,12 +79,9 @@ public class MyProfile extends Fragment {
     SessionManager session;
     Calendar mcurrentDate;
     int day, month, year;
-
     Spinner gender;
-
-
     String statename,stateId;
-    HashMap<String, String> hashMapSatte = new HashMap<String, String>();
+    HashMap<String,String> hashMapSatte = new HashMap<String, String>();
     ArrayList<String> categories = new ArrayList<String>();
     ArrayList<String> categoriesGender = new ArrayList<String>();
     Spinner state;
@@ -91,14 +89,14 @@ public class MyProfile extends Fragment {
     ArrayAdapter<String> dataAdapterGender;
     private static String encodedrediept = "";
     Uri targetUri;
-    String baseimage = "",value;
+    String baseimage = "",value,statess;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         View v= inflater.inflate(R.layout.fragment_my_profile, container, false);
-
 
         categoriesGender.add("Select Gender");
         categoriesGender.add("Male");
@@ -124,8 +122,6 @@ public class MyProfile extends Fragment {
         dataAdapterGender = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoriesGender);
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(dataAdapterGender);
-
-        getState();
 
         mcurrentDate = Calendar.getInstance();
         day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
@@ -356,7 +352,7 @@ public class MyProfile extends Fragment {
                                 String names = jsonSub.getString("name");
                                 String emails = jsonSub.getString("email");
                                 String mobile =jsonSub.getString("mobile");
-                                String states = jsonSub.getString("state");
+                                statess = jsonSub.getString("state");
                                 String citys = jsonSub.getString("city");
                                 String addresss = jsonSub.getString("address");
                                 String occupations = jsonSub.getString("occupation");
@@ -374,9 +370,8 @@ public class MyProfile extends Fragment {
                                 occupation.setText(occupations);
                                 birthdate.setText(dobs);
 
-                                int spinnerPosition = dataAdapter.getPosition(states);
-                                state.setSelection(spinnerPosition);
 
+                                getState();
 
 //                                if(citys.equals(" ")){
 //                                    city.setHint("City");
@@ -606,6 +601,8 @@ public class MyProfile extends Fragment {
                                 dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
                                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 state.setAdapter(dataAdapter);
+                                int spinnerPosition = dataAdapter.getPosition(statess);
+                                state.setSelection(spinnerPosition);
 
 
                             }
@@ -712,7 +709,6 @@ public class MyProfile extends Fragment {
             return "circle";
         }
     }
-
 
     }
 

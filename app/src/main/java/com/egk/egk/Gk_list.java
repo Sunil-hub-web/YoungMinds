@@ -52,12 +52,17 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
     TextView start, end;
     String stoen, id ;
     Date stdt, endt;
+    int L = 10;
     ArrayList<GkGetSet> caterogotyArraylist = new ArrayList<GkGetSet>();
     private RecyclerView.LayoutManager layoutManager;
     private int mYear, mMonth, mDay, mHour, mMinute;
     ImageView go;
 //    public static String ;
     PopularAdapter adapter;
+
+
+boolean status =false;
+//    List<String> newList = new ArrayList<>(inputList.subList(0,L));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +88,6 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
 
         start = (TextView) findViewById(R.id.start);
         end = (TextView) findViewById(R.id.end);
-
         go = (ImageView) findViewById(R.id.go);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +144,7 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
 
             }
         });
+
         end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,13 +224,15 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
 
         adapter = new PopularAdapter(Gk_list.this,caterogotyArraylist, this);
 
-//                                layoutManager = new LinearLayoutManager(PopularProduct.this);
+//      layoutManager = new LinearLayoutManager(PopularProduct.this);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         id = getIntent().getStringExtra("id");
         getGkLsit(getIntent().getStringExtra("id"));
+
+
     }
 
 
@@ -237,7 +244,6 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
         String url = "https://egknow.com/service-web/webservice.php?method=getGkList&data="+a+id+c;
 
         progressDialog.showDialog();
-//        http://egknow.com/service-web/webservice.php?method=getGkList&data={"category_id":""}
         Log.d("Receive", url);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -250,12 +256,14 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
                         //    pDialog.dismiss();
                         progressDialog.hideDialog();
 
+                            // playerList.add
+
                         try {
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
 
                             JSONArray jsonArray = jsonObjMain.getJSONArray("gkList");
-                            for (int i = 0 ;i<jsonArray.length();i++) {
+                            for (int i = 0 ;i<10;i++) {
 
                                 JSONObject jsonSubJson = jsonArray.getJSONObject(i);
                                 String gk_id = jsonSubJson.getString("gk_id");
@@ -264,8 +272,8 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
                                 String category_name = jsonSubJson.getString("category_name");
                                 String gk_date = jsonSubJson.getString("gk_date");
 
-
                                 caterogotyArraylist.add(new GkGetSet(gk_id, category_name, gk_date, gk_title, gk_desc));
+
                             }
 
 //                            adapter.notifyDataSetChanged();
@@ -281,6 +289,7 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
                             Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
 //                            Toast.makeText(getApplicationContext(), "Successfully Logined", Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -415,6 +424,7 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
 
     @Override
     public void onContactSelected(GkGetSet contact) {
+
     }
 
 
@@ -439,4 +449,6 @@ public class Gk_list extends AppCompatActivity implements PopularAdapter.Contact
 
         return html;
     }
+
+
 }

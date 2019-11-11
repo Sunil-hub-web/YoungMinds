@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MatchPoint extends Fragment {
 
@@ -78,9 +79,10 @@ RecyclerView recyclerView;
 
         return v;
     }
+
     public void getMatchPoint() {
 
-        String url = "https://egknow.com/Web_Service/web_service.php?method=getsMatchPoint";
+        String url = "https://egknow.com/service-web/webservice.php?method=getsMatchPoint";
 
         progressDialog.showDialog();
 
@@ -111,7 +113,7 @@ RecyclerView recyclerView;
 
                                     matchPointGet.add(new MatchPointGetSet(match_point_id, match_date,description));
                                 }
-
+//                                Collections.reverse(matchPointGet);
                                 MatchPointAdapter adapter = new MatchPointAdapter(matchPointGet, getActivity());
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
