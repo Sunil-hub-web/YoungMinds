@@ -43,10 +43,7 @@ public class RegistrationPage extends AppCompatActivity {
         setContentView(R.layout.activity_registration_page);
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        session = new SessionManager(getApplicationContext());
-
-
+        session = new SessionManager(this);
 
         progressDialog = new ViewDialog(this);
         edt_name = findViewById(R.id.edt_name);

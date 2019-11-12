@@ -113,9 +113,9 @@ public class ForgotOTP extends AppCompatActivity {
 
 
                             if (statuse.equalsIgnoreCase("false")) {
-                                String userId = jsonObjMain.getString("err_msg");
+                                String err_msg = jsonObjMain.getString("err_msg");
 
-                                Toast.makeText(getApplicationContext(), userId, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), err_msg, Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (Exception r) {

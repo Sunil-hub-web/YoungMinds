@@ -57,8 +57,8 @@ public class MonthlyGk extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Log.e("mukesh", "" + position);
-                MontlyGetSet itemname = montlyGet.get(position);
 
+                MontlyGetSet itemname = montlyGet.get(position);
 
                 Intent i = new Intent(getActivity(), MonthlyActivity.class);
                 i.putExtra("id",itemname.getMonthly_gk_id());

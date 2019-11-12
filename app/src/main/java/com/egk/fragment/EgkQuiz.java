@@ -33,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
 import com.egk.activites.LeaderBoard;
 import com.egk.activites.QuestionAns_Activity;
 import com.egk.egk.R;
@@ -55,7 +54,7 @@ public class EgkQuiz extends Fragment {
     LinearLayout session_linear;
     RelativeLayout quizlayout;
     TextView txt_sessoin;
-    String date,str,session_start_time,session_start_date,competition_id,session_id;
+    String date,str,session_start_time="",session_start_date="",competition_id="",session_id;
     int Apitime,realtime;
 
     @Override
@@ -106,33 +105,24 @@ public class EgkQuiz extends Fragment {
 
             }
         });
+        session_linear.setEnabled(true);
+    session_linear.setOnClickListener(new View.OnClickListener() {
 
-        session_linear.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-            @Override
-            public void onClick(View v) {
+            if (CheckDates(date, session_start_date)&& (checktimings(str, session_start_time))){
+                Intent inttt = new Intent(getActivity(), QuestionAns_Activity.class);
+                inttt.putExtra("sessionId", session.getSessionId());
+                startActivity(inttt);
 
-                 if (CheckDates(date,session_start_date)
-                         &&
-                         (checktimings(str,session_start_time)
-
-                         )
-                     ){
-
-                     Intent inttt = new Intent(getActivity(), QuestionAns_Activity.class);
-                     inttt.putExtra("sessionId", session.getSessionId());
-                     startActivity(inttt);
-                    }else {
-
-                     Toast.makeText(getActivity(), "There is No Session at this Time", Toast.LENGTH_SHORT).show();
-
-                }
-
+            } else {
+                Toast.makeText(getActivity(), "There is No Session at this Time", Toast.LENGTH_SHORT).show();
+                session_linear.setEnabled(false);
 
             }
-        });
-
-
+        }
+    });
 
         getCompetitionList();
         return  v;
@@ -150,6 +140,7 @@ public class EgkQuiz extends Fragment {
         try {
             if (dfDate.parse(date).before(dfDate.parse(session_start_date))) {
                 b = false;  // If start date is before end date.
+
             }  else {
                 b = true; // If start date is after the end date.
             }
@@ -180,7 +171,7 @@ public class EgkQuiz extends Fragment {
         return false;
     }
 
-    public  void   getCompetitionList(){
+    public  void  getCompetitionList(){
 
         progressDialog.showDialog();
         String a = "{\"u_id\":\"";
@@ -226,6 +217,7 @@ public class EgkQuiz extends Fragment {
                                     String total_mark = jsonSubJson.getString("total_mark");
 
                                     image.setImageUrl(competition_img, imageLoader);
+
                                     competationName.setText(competition_name);
                                     date_val.setText(competition_date);
 
@@ -236,6 +228,7 @@ public class EgkQuiz extends Fragment {
                                     timeValue.setText(session_start_time);
                                     score_value.setText(total_mark);
 
+//                                    session_linear.setEnabled(true);
 
                                 }
 

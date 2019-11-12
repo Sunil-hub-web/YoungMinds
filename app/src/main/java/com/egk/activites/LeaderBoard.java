@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -35,6 +36,7 @@ public class LeaderBoard extends AppCompatActivity {
     RecyclerView recyclerView;
     String cpId;
     ViewDialog progressDialog;
+    TextView txt_tittle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,8 @@ public class LeaderBoard extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycle_leader);
         cpId=getIntent().getStringExtra("compId");
         progressDialog = new ViewDialog(LeaderBoard.this);
-
+        txt_tittle=(TextView)findViewById(R.id.txt_tittle);
+        txt_tittle.setText("LEADERBOARD");
         ImageView back = (ImageView) findViewById(R.id.gk_backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,7 @@ public class LeaderBoard extends AppCompatActivity {
         getLeaderBoard();
 
     }
+
     public  void getLeaderBoard(){
 
         String a = "{\"competitions_id\":\"";
@@ -65,14 +69,14 @@ public class LeaderBoard extends AppCompatActivity {
 
         progressDialog.showDialog();
 
-        Log.d("Receive", url);
+        Log.d("leadrboard", url);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Ranjeetregister", response.toString());
+                        Log.d("leadrboardresponse", response.toString());
                         String REsult = response.toString();
                         //    pDialog.dismiss();
                         progressDialog.hideDialog();
@@ -98,6 +102,9 @@ public class LeaderBoard extends AppCompatActivity {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                                 recyclerView.setAdapter(adapter);
 
+                            }else if (statuse.equalsIgnoreCase("false")){
+                                String message=jsonObjMain.getString("msg");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (Exception r) {

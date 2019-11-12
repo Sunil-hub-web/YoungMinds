@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#DDDFE0"
+    android:background="@color/white"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,42 +11,43 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/quizbox"
-        android:layout_marginTop="@dimen/dimen_2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
        >
 
         <TextView
             android:id="@+id/txt_num"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:padding="@dimen/dimen_2dp"
+            android:minHeight="@dimen/layout_height"
+            android:layout_height="wrap_content"
             android:text="1"
             android:gravity="center"
             android:layout_weight="1"
             android:textColor="#868585"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:textSize="12dp"/>
         <TextView
             android:id="@+id/txt_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:padding="@dimen/dimen_2dp"
+            android:minHeight="@dimen/layout_height"
+            android:layout_height="wrap_content"
             android:text="mkkk"
             android:gravity="center"
             android:layout_weight="1"
             android:textColor="#48B0C2"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/txt_mark"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:padding="@dimen/dimen_2dp"
+            android:minHeight="@dimen/layout_height"
+            android:layout_height="wrap_content"
             android:text="100"
             android:gravity="center"
             android:layout_weight="1"
             android:textColor="#868585"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:textSize="12dp"/>
 
     </LinearLayout>

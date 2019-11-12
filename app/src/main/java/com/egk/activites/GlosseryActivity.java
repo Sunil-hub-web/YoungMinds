@@ -155,6 +155,7 @@ try {
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                                 recyclerView.setAdapter(adapter);
+
                                }else if (statuse.equalsIgnoreCase("false")){
                                 String message=jsonObjMain.getString("msg");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -244,9 +245,9 @@ try {
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+//        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
+//        d.addLevel(0, 0, empty);
+//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
 
         new LoadImage().execute(source, d);
 

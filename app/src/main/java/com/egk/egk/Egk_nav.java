@@ -1,6 +1,5 @@
 package com.egk.egk;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +28,6 @@ import com.egk.fragment.HomeFragment;
 import com.egk.fragment.MatchPoint;
 import com.egk.fragment.MonthlyGk;
 import com.egk.fragment.MyProfile;
-import com.egk.fragment.My_Gk;
 import com.egk.fragment.My_Notifications;
 import com.egk.fragment.My_Offers;
 import com.egk.fragment.My_Topup;
@@ -329,6 +327,12 @@ public class Egk_nav extends AppCompatActivity
         }
 
        else if (id == R.id.nav_share) {
+            Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Insert Subject here");
+            String app_url = "https://play.google.com/store/apps/details?id=com.egk.egk&hl=en";
+            shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,app_url);
+            startActivity(Intent.createChooser(shareIntent, "Share via"));
 
         } else if (id == R.id.nav_send_privacy) {
             headtitle.setText("Privacy Policy");

@@ -104,7 +104,7 @@ public class My_Transaction extends Fragment {
         }else{
             url = url;
         }
-        Log.d("Sonu",url);
+        Log.d("TransactionHistory",url);
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading, Please wait...");
@@ -119,7 +119,7 @@ public class My_Transaction extends Fragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Homecategories", response.toString());
+                        Log.d("TransactionHistoryresp", response.toString());
                         String REsult = response.toString();
 
 //                        pDialog.dismiss();
@@ -154,7 +154,6 @@ public class My_Transaction extends Fragment {
 
                                     Transaction_Adapter adapter = new Transaction_Adapter(joblist, My_Transaction.this);
                                     recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager linear= new LinearLayoutManager(getActivity());
                                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                     recyclerView.setAdapter(adapter);
                                 }

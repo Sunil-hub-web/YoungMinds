@@ -380,32 +380,28 @@
 
             <Button
                 android:id="@+id/edit"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="150dp"
+                android:layout_height="@dimen/layout_height"
                 android:background="@drawable/btn_box"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginRight="22dp"
                 android:text="Update Profile"
-                android:textColor="#ffffff"
-                android:textSize="15dp"
-                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+              android:layout_gravity="center"
                  />
 
             <Button
                 android:id="@+id/save_profile"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="150dp"
+                android:layout_height="@dimen/layout_height"
                 android:background="@drawable/btn_box"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginRight="22dp"
                 android:visibility="gone"
                 android:text="Save Profile"
-                android:textColor="#ffffff"
-                android:textSize="15dp"/>
+                android:textColor="@color/white"
+                android:textSize="12dp"/>
 
         </LinearLayout>
 

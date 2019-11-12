@@ -47,35 +47,7 @@ public class My_Offers extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.rcy_offers);
         progressDialog = new ViewDialog(getActivity());
 
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-//            Fragment intent1 = null;
-//
-//            @Override
-//            public void onClick(View view, int position) {
-//                Log.e("mukesh", "" + position);
-//
-//
-//                if (position == 0) {
-//                    Intent i = new Intent(getActivity(), Offer_list.class);
-//                    startActivity(i);
-//
-//
-//                } else if (position == 1) {
-//                    Intent j = new Intent(getActivity(), Offer_list.class);
-//                    startActivity(j);
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//                Toast.makeText(getActivity(), "Long press on position :" + position,
-//                        Toast.LENGTH_LONG).show();
-//
-//            }
-//        }));
+
 
         getOfferDetails();
         return v;

@@ -100,14 +100,7 @@ String catname,catId,currentyear;
 
             }
         }));
-
-
-
-
         //filter
-
-
-
 
 //year
         yearcategory.add("2010");
@@ -166,12 +159,12 @@ String catname,catId,currentyear;
 
    if (currentyear=="Select Year"){
     Toast.makeText(getActivity(), "Select Year", Toast.LENGTH_SHORT).show();
-  }else if (catname=="Select Category"){
+    }else if (catname=="Select Category"){
     Toast.makeText(getActivity(), "Select category", Toast.LENGTH_SHORT).show();
-  } else {
+    } else {
        nodata.setVisibility(View.GONE);
        getFilteredTestpaper();
-   }
+     }
             }
         });
 
@@ -190,7 +183,7 @@ String catname,catId,currentyear;
 
         String url = "https://egknow.com/service-web/webservice.php?method=getPastPaperList&data="+a+""+b+""+c;;
 
-        progressDialog.showDialog();
+//        progressDialog.showDialog();
 
         Log.d("exampapers", url);
 
@@ -202,7 +195,7 @@ String catname,catId,currentyear;
                         Log.d("exampapersresponse", response.toString());
                         String REsult = response.toString();
                         //    pDialog.dismiss();
-                        progressDialog.hideDialog();
+//                        progressDialog.hideDialog();
 
                         try {
                             JSONObject jsonObjMain = new JSONObject(REsult);
@@ -229,7 +222,7 @@ String catname,catId,currentyear;
 
 
                         } catch (Exception r) {
-                            progressDialog.hideDialog();
+//                            progressDialog.hideDialog();
                             Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
 //                            Toast.makeText(getApplicationContext(), "Successfully Logined", Toast.LENGTH_SHORT).show();
                         }
@@ -238,7 +231,7 @@ String catname,catId,currentyear;
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.hideDialog();
+//                progressDialog.hideDialog();
                 Log.d("Ranjeet", "Error: " + error.getMessage());
                 // hide the progress dialog
 

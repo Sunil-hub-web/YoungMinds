@@ -56,9 +56,6 @@ public class My_Notifications extends Fragment {
 
     public void getNotification() {
 
-//        String a = "{\"category_id\":\"";
-//        String b = "\",\"password\":\"";
-//        String c = "\"}";
         String url = "https://egknow.com/service-web/webservice.php?method=getUserNotificationList";
 
         progressDialog.showDialog();

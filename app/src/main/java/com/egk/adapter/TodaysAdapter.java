@@ -1,5 +1,4 @@
 package com.egk.adapter;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,22 +9,13 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.egk.activites.ViewActivity;
 import com.egk.egk.R;
-import com.egk.gettersetter.GkGetSet;
 import com.egk.gettersetter.TodaysGetSet;
-
-import org.w3c.dom.Document;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,8 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -67,8 +55,8 @@ public class TodaysAdapter extends RecyclerView.Adapter<TodaysAdapter.MyViewHold
 
         source=movie.getDescription();
         catname.setText(Html.fromHtml(source, imgGetter, null));
-        String strCurrentDate = movie.getTodays_date();
 
+        String strCurrentDate = movie.getTodays_date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = null;
         try {
@@ -81,7 +69,6 @@ public class TodaysAdapter extends RecyclerView.Adapter<TodaysAdapter.MyViewHold
         String dt = format.format(newDate);
 
         date.setText("  -  " + dt);
-
 
     }
 
@@ -101,7 +88,6 @@ public class TodaysAdapter extends RecyclerView.Adapter<TodaysAdapter.MyViewHold
 
 
     }
-
 
     private String removeHtml(String html) {
         html = html.replaceAll("<(.*?)\\>", " ");
@@ -129,9 +115,9 @@ public class TodaysAdapter extends RecyclerView.Adapter<TodaysAdapter.MyViewHold
     private Html.ImageGetter imgGetter = new Html.ImageGetter() {
         public Drawable getDrawable(String source) {
             LevelListDrawable d = new LevelListDrawable();
-            Drawable empty = context.getResources().getDrawable(R.drawable.app_icon);
-            d.addLevel(0, 0, empty);
-            d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+//            Drawable empty = context.getResources().getDrawable(R.drawable.app_icon);
+//            d.addLevel(0, 0, empty);
+//            d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
 
         new LoadImage().execute(source, d);
 

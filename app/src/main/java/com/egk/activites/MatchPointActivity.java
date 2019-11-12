@@ -52,11 +52,7 @@ ImageView gk_backicon;
         });
 
         id=getIntent().getStringExtra("id");
-//        descptin=getIntent().getStringExtra("desc");
-
-//        datee=getIntent().getStringExtra("date");
         tittle.setText("Match Point");
-//        txt_desc.setText(removeHtml(descptin));
 
         String strCurrentDate = getIntent().getStringExtra("date");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -105,9 +101,9 @@ ImageView gk_backicon;
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+//        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
+//        d.addLevel(0, 0, empty);
+//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
 
         new LoadImage().execute(source, d);
 

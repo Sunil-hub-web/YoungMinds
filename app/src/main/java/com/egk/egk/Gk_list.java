@@ -276,7 +276,6 @@ boolean status =false;
 
                             }
 
-//                            adapter.notifyDataSetChanged();
                             GktotalAdapter adapter = new GktotalAdapter(caterogotyArraylist);
                             recyclerView.setHasFixedSize(true);
 

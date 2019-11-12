@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context="com.egk.activites.LeaderBoard">
 
     <RelativeLayout
@@ -20,14 +21,32 @@
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             />
+
+        <TextView
+            android:id="@+id/txt_tittle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/gk_backicon"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:text="domo"
+            android:textColor="@color/black"
+          android:gravity="start|center"
+            android:fontFamily="sans-serif-medium"/>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/relative"
+        android:background="@color/view_color"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycle_leader"
         android:layout_below="@+id/relative"
-        android:layout_marginTop="@dimen/dimen_2dp"
+        android:layout_marginTop="3dp"
         >
     </android.support.v7.widget.RecyclerView>
 

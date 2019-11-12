@@ -1,26 +1,13 @@
 package com.egk.fragment;
-
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LevelListDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -30,30 +17,15 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.egk.activites.TodaysActivity;
-import com.egk.activites.ViewActivity;
-import com.egk.activites.ViewGk;
-import com.egk.adapter.GktotalAdapter;
 import com.egk.adapter.TodaysAdapter;
 import com.egk.egk.R;
 import com.egk.extra.AppSingleton;
-import com.egk.extra.RecyclerTouchListener;
 import com.egk.extra.ViewDialog;
-import com.egk.gettersetter.GkGetSet;
 import com.egk.gettersetter.TodaysGetSet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 
 
 public class Todays extends Fragment {
@@ -62,9 +34,6 @@ RecyclerView recyclerView;
     ArrayList<TodaysGetSet> todaysGet = new ArrayList<TodaysGetSet>();
     ViewDialog progressDialog;
     private RecyclerView.LayoutManager layoutManager;
-    boolean your_date_is_outdated;
-    String source = "";
-    private final static String TAG = "TestImageGetter";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,29 +43,6 @@ RecyclerView recyclerView;
         progressDialog=new ViewDialog(getActivity());
 
         getTodaysList();
-
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-//            Fragment intent1 = null;
-//
-//            @Override
-//            public void onClick(View view, int position) {
-//                Log.e("mukesh", "" + position);
-//                TodaysGetSet itemname = todaysGet.get(position);
-//
-//
-//                Intent i = new Intent(getActivity(), TodaysActivity.class);
-//                i.putExtra("description",itemname.getDescription());
-//                startActivity(i);
-//
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//                Toast.makeText(getActivity(), "Long press on position :" + position,
-//                        Toast.LENGTH_LONG).show();
-//
-//            }
-//        }));
 
         return v;
     }

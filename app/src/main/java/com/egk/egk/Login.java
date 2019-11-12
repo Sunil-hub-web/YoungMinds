@@ -80,6 +80,7 @@ public class Login extends AppCompatActivity {
                 } else if (edtl_pswd.getText().length() == 0) {
                     Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
                 } else {
+
                     //    Intent i = new Intent(Login.this, Egk_nav.class);
                     //      startActivity(i);
 

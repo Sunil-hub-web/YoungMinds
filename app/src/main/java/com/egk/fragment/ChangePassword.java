@@ -87,7 +87,7 @@ public class ChangePassword extends Fragment {
         String d = "\",\"confirm_password\":\"";
         String e = "\"}";
 
-        String url="https://egknow.com/service-web/webservice.php?method=changeUserPassword&data="+a+new SessionManager(getActivity()).getUserID()+
+        String url="https://egknow.com/service-web/webservice.php?method=changeUserPassword&data="+a+sessionManager.getUserID()+
                 b+edt_old_pass.getText().toString()+c+edt_new_pswd.getText().toString()+d+edt_cnf_pswd.getText().toString()+e;
 
         viewDialog.showDialog();

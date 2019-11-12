@@ -87,9 +87,9 @@ public class MonthlyActivity extends AppCompatActivity implements Html.ImageGett
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+//        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
+//        d.addLevel(0, 0, empty);
+//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
 
         new LoadImage().execute(source, d);
 

@@ -93,6 +93,7 @@ public class My_Gk extends Fragment {
         }));
 
         getCategortList();
+
         return v;
     }
 
