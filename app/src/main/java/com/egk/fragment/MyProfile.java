@@ -58,6 +58,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bumptech.glide.Glide;
 import com.egk.egk.Egk_nav;
 import com.egk.egk.R;
 import com.egk.extra.AppSingleton;
@@ -118,7 +119,12 @@ public class MyProfile extends Fragment {
         address=(EditText)v.findViewById(R.id.address);
         birthdate=(TextView) v.findViewById(R.id.birthdate);
 
-        user_image.setEnabled(false);
+        session = new SessionManager(getActivity());
+        getuserProfile();
+
+//        user_image.setEnabled(false);
+
+
         dataAdapterGender = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoriesGender);
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(dataAdapterGender);
@@ -172,7 +178,10 @@ public class MyProfile extends Fragment {
         state.setClickable(false);
 
 
-        session = new SessionManager(getActivity());
+
+
+
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,8 +196,9 @@ public class MyProfile extends Fragment {
                 edit.setVisibility(View.GONE);
                 save_profile.setVisibility(View.VISIBLE);
                 state.setEnabled(true);
-                user_image.setEnabled(true);
-                edtprofile_icon_img.setVisibility(View.VISIBLE);
+//                user_image.setEnabled(true);
+//                Glide.with(getActivity()).load(R.drawable.profile_icon).into(user_image);
+//                edtprofile_icon_img.setVisibility(View.VISIBLE);
                 state.setClickable(true);
             }
         });
@@ -196,7 +206,7 @@ public class MyProfile extends Fragment {
             @Override
             public void onClick(View v) {
 
-                edtprofile_icon_img.setVisibility(View.GONE);
+//                edtprofile_icon_img.setVisibility(View.GONE);
 
                 if (name.getText().length() == 0) {
                     Toast.makeText(getActivity(), "Enter Name", Toast.LENGTH_SHORT).show();
@@ -244,7 +254,8 @@ public class MyProfile extends Fragment {
             }
         });
 
-        getuserProfile();
+
+
 
         return v;
 
@@ -273,8 +284,8 @@ public class MyProfile extends Fragment {
                 Log.d("plih", "4");
                 Log.d("jdhfnf", String.valueOf(targetUri));
                 session.setPhoto(String.valueOf(targetUri));
+               Picasso.with(getActivity()).load(targetUri).transform(new CircleTransform()).into(user_image);
 
-                Picasso.with(getActivity()).load(targetUri).transform(new CircleTransform()).into(user_image);
                 InputStream imageStream = null;
                 Log.d("plih", "5");
                 try {
@@ -289,10 +300,12 @@ public class MyProfile extends Fragment {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 yourSelectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 Log.d("plih", "8");
-                baseimage = encodeTobase64(yourSelectedImage);
-                session.setPhoto(baseimage);
-                Log.d("dfevrds", session.getPhoto());
+                    baseimage = encodeTobase64(yourSelectedImage);
+                    session.setPhoto(baseimage);
+                    Log.d("dfevrds", session.getPhoto());
 
+                Updateuserprofile updateuserprofile =new Updateuserprofile();
+                updateuserprofile.execute();
 //                Log.d("jkzvfs",baseimage);
 
 //                UploadToServer uploadToServer=new UploadToServer();
@@ -363,13 +376,16 @@ public class MyProfile extends Fragment {
                                 name.setText(names);
                                 email.setText(emails);
                                 phone.setText(mobile);
-                                Picasso.with(getActivity()).load(img).transform(new CircleTransform()).into(user_image);
                                 session.setPhoto(img);
                                 city.setText(citys);
                                 address.setText(addresss);
                                 occupation.setText(occupations);
                                 birthdate.setText(dobs);
-
+                                if (img.equalsIgnoreCase("")){
+                                    Picasso.with(getActivity()).load(R.drawable.profile_icon).transform(new CircleTransform()).into(user_image);
+                                }else {
+                                    Picasso.with(getActivity()).load(img).transform(new CircleTransform()).into(user_image);
+                                }
 
                                 getState();
 
@@ -508,13 +524,16 @@ public class MyProfile extends Fragment {
                                 address.setText(addresss);
                                 occupation.setText(occupations);
                                 birthdate.setText(dobs);
-                           Picasso.with(getActivity()).load(img).transform(new CircleTransform()).into(user_image);
+                    if (img.equalsIgnoreCase("")){
+                        Picasso.with(getActivity()).load(R.drawable.profile_icon).transform(new CircleTransform()).into(user_image);
+                    }else {
+                        Picasso.with(getActivity()).load(img).transform(new CircleTransform()).into(user_image);
+                    }
+//                                Picasso.with(getActivity()).load(img).transform(new CircleTransform()).into(user_image);
                                 session.setPhoto(img);
                                 Log.d("djkj",img);
                                 Log.d("djhf",session.getPhoto());
 
-//                    Picasso.with(getActivity()).load(targetUri)
-//                            .transform(new CircleTransform()).into(profile_three);
                     int spinnerPosition = dataAdapter.getPosition(states);
                     state.setSelection(spinnerPosition);
 
@@ -528,7 +547,7 @@ public class MyProfile extends Fragment {
                                 birthdate.setEnabled(false);
                                 edit.setVisibility(View.VISIBLE);
                                 save_profile.setVisibility(View.GONE);
-                                user_image.setEnabled(false);
+//                                user_image.setEnabled(false);
 
                                 state.setEnabled(false);
                                 state.setClickable(false);

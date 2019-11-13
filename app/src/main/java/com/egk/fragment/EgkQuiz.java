@@ -105,30 +105,31 @@ public class EgkQuiz extends Fragment {
 
             }
         });
-        session_linear.setEnabled(true);
-    session_linear.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
 
-            if (CheckDates(date, session_start_date)&& (checktimings(str, session_start_time))){
-                Intent inttt = new Intent(getActivity(), QuestionAns_Activity.class);
-                inttt.putExtra("sessionId", session.getSessionId());
-                startActivity(inttt);
+            session_linear.setOnClickListener(new View.OnClickListener() {
 
-            } else {
-                Toast.makeText(getActivity(), "There is No Session at this Time", Toast.LENGTH_SHORT).show();
-                session_linear.setEnabled(false);
+                @Override
+                public void onClick(View v) {
 
-            }
-        }
-    });
+                    if (CheckDates(date, session_start_date) && (checktimings(str, session_start_time))) {
+                        Intent inttt = new Intent(getActivity(), QuestionAns_Activity.class);
+                        inttt.putExtra("sessionId", session.getSessionId());
+                        startActivity(inttt);
+
+                    } else {
+                        Toast.makeText(getActivity(), "There is No Session at this Time", Toast.LENGTH_SHORT).show();
+                        session_linear.setEnabled(false);
+
+
+                    }
+                }
+            });
 
         getCompetitionList();
         return  v;
 
     }
-
 
 
     public static boolean CheckDates(String date, String session_start_date) {
@@ -189,9 +190,7 @@ public class EgkQuiz extends Fragment {
                         Log.d("Questresponse", response.toString());
                         String REsult = response.toString();
 
-
                         try {
-
                             progressDialog.hideDialog();
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
@@ -251,7 +250,7 @@ public class EgkQuiz extends Fragment {
                         } catch (Exception r) {
                             progressDialog.hideDialog();
 
-                            Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
+                            Log.d("ExceptionError", "ranjeet Error" + r.toString());
                             Toast.makeText(getActivity(), "There is No Session", Toast.LENGTH_SHORT).show();
                         }
                     }

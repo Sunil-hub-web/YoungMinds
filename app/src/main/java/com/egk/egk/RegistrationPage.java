@@ -71,14 +71,11 @@ public class RegistrationPage extends AppCompatActivity {
                 } else if (edt_mob_no.getText().length() == 0) {
                     Toast.makeText(RegistrationPage.this, "Enter Mobile No", Toast.LENGTH_SHORT).show();
 
-                } else if (edt_mob_no.getText().length()!=10){
+                } else if (edt_mob_no.getText().length()!=10) {
 
                     Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
 
-                } else if (isValidPhoneNumber(edt_mob_no.getText().toString())){
-                    Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
                 }
-
                 else if (!edt_email.getText().toString().matches(emailpattern)) {
                     Toast.makeText(RegistrationPage.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
                 }

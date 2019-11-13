@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -56,9 +57,10 @@ SessionManager sessionManager;
     String question_id,question_ans1,question_ans2,question_ans3,question_ans4;
     String minn;
     private ShimmerFrameLayout mShimmerViewContainer;
-    RelativeLayout viewContent;
+    RelativeLayout viewContent,relative1;
     View includedLayout;
     Context context;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +87,16 @@ SessionManager sessionManager;
                 onBackPressed();
             }
         });
-        sessionManager = new SessionManager(getApplicationContext());
-        progressDialog = new ViewDialog(QuestionAns_Activity.this);
+        sessionManager = new SessionManager(this);
+        progressDialog = new ViewDialog(this);
         date  = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         Time  = java.text.DateFormat.getTimeInstance().format(new Date());
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         str  = sdf.format(new Date());
         viewContent=(RelativeLayout)findViewById(R.id.viewContent);
+        relative1=(RelativeLayout)findViewById(R.id.relative1);
+
 //        minn= LocalTime.MIN.plusSeconds(120).format(DateTimeFormatter.ISO_LOCAL_TIME);
 //        Log.d("mukkkkk",minn);
 
@@ -107,15 +111,17 @@ SessionManager sessionManager;
 
               if (radio_btn1.isChecked()) {
                   QuestAnswer(question_id,question_ans1);
+                  radioGroup.invalidate();
+
               } else if (radio_btn2.isChecked()) {
                   QuestAnswer(question_id,question_ans2);
-
+                  radioGroup.invalidate();
               } else if (radio_btn3.isChecked()) {
                   QuestAnswer(question_id,question_ans3);
-
+                  radioGroup.invalidate();
               } else if (radio_btn4.isChecked()) {
                   QuestAnswer(question_id,question_ans4);
-
+                  radioGroup.invalidate();
               }else {
 
                   Toast.makeText(QuestionAns_Activity.this, "Select Atleast 1 Answer", Toast.LENGTH_SHORT).show();
