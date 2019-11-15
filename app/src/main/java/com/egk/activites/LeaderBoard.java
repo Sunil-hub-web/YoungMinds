@@ -93,11 +93,12 @@ public class LeaderBoard extends AppCompatActivity {
                                     String name = jsonSubJson.getString("u_name");
                                     String mark = jsonSubJson.getString("marks");
                                     String number = jsonSubJson.getString("rank");
-                                    quizlist.add(new QuizGetSet(number,name,mark));
+                                    String img = jsonSubJson.getString("img");
+                                    quizlist.add(new QuizGetSet(number,name,mark,img));
 
                                 }
 
-                                QuizAdapter adapter = new QuizAdapter(quizlist,LeaderBoard.this );
+                                QuizAdapter adapter = new QuizAdapter(quizlist,getApplicationContext() );
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                                 recyclerView.setAdapter(adapter);

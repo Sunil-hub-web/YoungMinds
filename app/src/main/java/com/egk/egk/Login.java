@@ -122,6 +122,7 @@ public class Login extends AppCompatActivity {
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
 
+
                             if (statuse.equalsIgnoreCase("true")) {
                                 String userId = jsonObjMain.getString("u_id");
                                 String user_name = jsonObjMain.getString("user_name");
@@ -132,6 +133,8 @@ public class Login extends AppCompatActivity {
                                 String address = jsonObjMain.getString("address");
                                 String occupation = jsonObjMain.getString("occupation");
                                 String dob = jsonObjMain.getString("dob");
+
+
                                 session.setUserID(userId);
                                 session.setUserName(user_name);
                                 session.setUserEmail(email);

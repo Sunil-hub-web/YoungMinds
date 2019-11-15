@@ -122,7 +122,7 @@ public class MyProfile extends Fragment {
         session = new SessionManager(getActivity());
         getuserProfile();
 
-//        user_image.setEnabled(false);
+
 
 
         dataAdapterGender = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoriesGender);
@@ -135,16 +135,18 @@ public class MyProfile extends Fragment {
         year = mcurrentDate.get(Calendar.YEAR);
 
         month = month + 1;
-        birthdate.setText(day + "/" + month + "/" + year);
+        birthdate.setText(day + "-" + month + "-" + year);
 
         birthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month + 1;
-                        birthdate.setText(dayOfMonth+ "/" + month + "/" +year);
+                        birthdate.setText(dayOfMonth+ "-" + month + "-" +year);
+//                        String dte=dayOfMonth+ "/" + month + "/" +year;
                     }
                 }, year, month, day);
                 datePickerDialog.show();

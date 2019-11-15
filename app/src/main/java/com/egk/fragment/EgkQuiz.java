@@ -24,10 +24,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -84,13 +82,14 @@ public class EgkQuiz extends Fragment {
 
 
         date  = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        session_start_date= new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//        session_start_date= new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         str  = sdf.format(new Date());
-        session_start_time=sdf.format(new Date());
+
+//        session_start_time=sdf.format(new Date());
 
 
         session = new SessionManager(getActivity());
@@ -105,10 +104,9 @@ public class EgkQuiz extends Fragment {
 
             }
         });
-
+        getCompetitionList();
 
             session_linear.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
 
@@ -119,14 +117,14 @@ public class EgkQuiz extends Fragment {
 
                     } else {
                         Toast.makeText(getActivity(), "There is No Session at this Time", Toast.LENGTH_SHORT).show();
-                        session_linear.setEnabled(false);
-
+//                        session_linear.setEnabled(false);
 
                     }
                 }
             });
 
-        getCompetitionList();
+
+
         return  v;
 
     }

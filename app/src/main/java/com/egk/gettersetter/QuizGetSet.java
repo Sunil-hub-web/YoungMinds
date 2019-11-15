@@ -5,6 +5,15 @@ public class QuizGetSet {
     public String Number;
     public String Name;
     public String Mark;
+    public String img;
+
+
+    public QuizGetSet(String number, String name, String mark, String img) {
+        Number = number;
+        Name = name;
+        Mark = mark;
+        this.img = img;
+    }
 
     public String getNumber() {
         return Number;
@@ -30,13 +39,11 @@ public class QuizGetSet {
         Mark = mark;
     }
 
-
-    public QuizGetSet(String number, String name, String mark) {
-        Number = number;
-        Name = name;
-        Mark = mark;
+    public String getImg() {
+        return img;
     }
 
-
-
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
