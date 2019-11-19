@@ -41,11 +41,58 @@
         android:layout_below="@+id/relative"
         android:background="@color/view_color"/>
 
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:orientation="horizontal"
+        android:layout_below="@+id/relative"
+        android:background="@drawable/quizbox"
+        android:layout_margin="5dp"
+        >
+                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Rank"
+                    android:gravity="center"
+                    android:layout_weight="1.5"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1.5"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Name"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Score"
+            android:gravity="center"
+            android:layout_weight="1.5"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycle_leader"
-        android:layout_below="@+id/relative"
+        android:layout_below="@+id/linear"
         android:layout_marginTop="3dp"
         >
     </android.support.v7.widget.RecyclerView>

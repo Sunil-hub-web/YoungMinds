@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="textsize">15dp</dimen>
     <dimen name="layout_height">45dp</dimen>
+    <dimen name="leader_height">65dp</dimen>
     <dimen name="padding_left">9dp</dimen>
     <dimen name="margin_left">20dp</dimen>
     <dimen name="margin_right">20dp</dimen>

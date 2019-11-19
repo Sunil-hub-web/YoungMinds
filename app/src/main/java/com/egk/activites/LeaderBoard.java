@@ -49,6 +49,7 @@ public class LeaderBoard extends AppCompatActivity {
         txt_tittle=(TextView)findViewById(R.id.txt_tittle);
         txt_tittle.setText("LEADERBOARD");
         ImageView back = (ImageView) findViewById(R.id.gk_backicon);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,4 +138,5 @@ public class LeaderBoard extends AppCompatActivity {
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq, url);
 
     }
+
 }
