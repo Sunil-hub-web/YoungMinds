@@ -34,7 +34,8 @@ public class GlosseryTittleAdapter  extends RecyclerView.Adapter<GlosseryTittleA
     @Override
     public void onBindViewHolder(@NonNull GlosseryTittleAdapter.MyViewHolder myViewHolder, int i) {
         final Glosserytittlegetset My_list =glosserytittle.get(i);
-        myViewHolder.txt_gloss_tittle.setText(My_list.getTitle());
+        myViewHolder.txt_gloss_tittle.setText(removeHtml(My_list.getTitle()));
+        myViewHolder.desc.setText(removeHtml(My_list.getDecription()));
         Log.d("kdl",My_list.getTitle());
     }
 
@@ -46,10 +47,37 @@ public class GlosseryTittleAdapter  extends RecyclerView.Adapter<GlosseryTittleA
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-     TextView txt_gloss_tittle;
+     TextView txt_gloss_tittle,desc;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_gloss_tittle=(TextView)itemView.findViewById(R.id.txt_gloss_tittle);
+            desc=(TextView)itemView.findViewById(R.id.desc);
         }
+    }
+
+    private String removeHtml(String html) {
+        html = html.replaceAll("<(.*?)\\>"," ");
+        html = html.replaceAll("<(.*?)\\\n"," ");
+        html = html.replaceFirst("(.*?)\\>", " ");
+        html = html.replaceAll("&#039;s"," ");
+        html = html.replaceAll("&amp;","&");
+        html = html.replaceAll("&#39;","'");
+        html = html.replaceAll("&nbsp;","");
+        html = html.replaceAll("&amp;"," & ");
+        html = html.replaceAll("&nbs","");
+        html = html.replaceAll("&am"," ");
+        html = html.replaceAll("&rsquo;","");
+        html = html.replaceAll("&lsquo;","");
+        html = html.replaceAll("&ldquo;","");
+        html = html.replaceAll("&rdquo;","");
+        html = html.replaceAll("&ndash;","");
+        html = html.replaceAll("&rsquo;s","");
+        html = html.replaceAll("&hellip;","");
+        html = html.replaceAll("&#039;"," ");
+        html = html.replaceAll("&quot;"," ");
+        html = html.replaceAll("<p>","");
+
+        return html;
     }
 }

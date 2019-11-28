@@ -202,13 +202,10 @@ try {
         dialogCoupon.setCanceledOnTouchOutside(true);
 
 
-
-
-
         txt_tittle=(TextView)dialogCoupon.findViewById(R.id.txt_tittle);
         txt_desc=(TextView)dialogCoupon.findViewById(R.id.txt_desc);
 
-        txt_tittle.setText(gltittle);
+        txt_tittle.setText(removeHtml(gltittle));
 //        txt_desc.setText(removeHtml(descrtipi));
 //        source = getIntent().getStringExtra("description");
         Spanned spanned = Html.fromHtml(descrtipi, this, null);
@@ -217,30 +214,7 @@ try {
         dialogCoupon.show();
     }
 
-    private String removeHtml(String html) {
-        html = html.replaceAll("<(.*?)\\>"," ");
-        html = html.replaceAll("<(.*?)\\\n"," ");
-        html = html.replaceFirst("(.*?)\\>", " ");
-        html = html.replaceAll("&#039;s"," ");
-        html = html.replaceAll("&amp;","&");
-        html = html.replaceAll("&#39;","'");
-        html = html.replaceAll("&nbsp;","");
-        html = html.replaceAll("&amp;"," & ");
-        html = html.replaceAll("&nbs","");
-        html = html.replaceAll("&am"," ");
-        html = html.replaceAll("&rsquo;","");
-        html = html.replaceAll("&lsquo;","");
-        html = html.replaceAll("&ldquo;","");
-        html = html.replaceAll("&rdquo;","");
-        html = html.replaceAll("&ndash;","");
-        html = html.replaceAll("&rsquo;s","");
-        html = html.replaceAll("&hellip;","");
-        html = html.replaceAll("&#039;"," ");
-        html = html.replaceAll("&quot;"," ");
-        html = html.replaceAll("<p>","");
 
-        return html;
-    }
 
     @Override
     public Drawable getDrawable(String source) {
@@ -294,6 +268,32 @@ try {
                 txt_desc.setText(t);
             }
         }
+    }
+
+    private String removeHtml(String html) {
+        html = html.replaceAll("<(.*?)\\>"," ");
+        html = html.replaceAll("<(.*?)\\\n"," ");
+        html = html.replaceFirst("(.*?)\\>", " ");
+        html = html.replaceAll("&#039;s"," ");
+        html = html.replaceAll("&amp;","&");
+        html = html.replaceAll("&#39;","'");
+        html = html.replaceAll("&nbsp;","");
+        html = html.replaceAll("&amp;"," & ");
+        html = html.replaceAll("&nbs","");
+        html = html.replaceAll("&am"," ");
+        html = html.replaceAll("&rsquo;","");
+        html = html.replaceAll("&lsquo;","");
+        html = html.replaceAll("&ldquo;","");
+        html = html.replaceAll("&rdquo;","");
+        html = html.replaceAll("&ndash;","");
+        html = html.replaceAll("&rsquo;s","");
+        html = html.replaceAll("&hellip;","");
+        html = html.replaceAll("&#039;"," ");
+        html = html.replaceAll("&quot;"," ");
+        html = html.replaceAll("<p>","");
+        html = html.replaceAll("&nbsp;","");
+
+        return html;
     }
 
 }

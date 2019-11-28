@@ -135,7 +135,7 @@ public class MyProfile extends Fragment {
         year = mcurrentDate.get(Calendar.YEAR);
 
         month = month + 1;
-        birthdate.setText(day + "-" + month + "-" + year);
+//        birthdate.setText(day + "-" + month + "-" + year);
 
         birthdate.setOnClickListener(new View.OnClickListener() {
             @Override
