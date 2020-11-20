@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.egk.extra.SessionManager;
+import com.egk.fragment.BasicGk;
 import com.egk.fragment.ChangePassword;
 import com.egk.fragment.EgkQuiz;
 import com.egk.fragment.GkItemCategory;
@@ -34,8 +35,10 @@ import com.egk.fragment.My_Topup;
 import com.egk.fragment.My_Transaction;
 import com.egk.fragment.PreviousTestPAper_Fragment;
 import com.egk.fragment.PrivacyPolicyFragment;
+import com.egk.fragment.Recharge_point;
 import com.egk.fragment.Report;
 import com.egk.fragment.Todays;
+import com.egk.fragment.Upcoming_Exam;
 
 import static com.egk.egk.R.id.screen_area;
 
@@ -193,7 +196,29 @@ public class Egk_nav extends AppCompatActivity
             startActivity(intent);
             finish();
 
-        }else if (currentFragment instanceof MatchPoint) {
+        }
+        else if (currentFragment instanceof MatchPoint) {
+            Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
+            startActivity(intent);
+            finish();
+
+        }
+        else if (currentFragment instanceof Recharge_point) {
+            Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
+            startActivity(intent);
+            finish();
+
+        }
+        else if (currentFragment instanceof BasicGk)
+        {
+
+            Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
+            startActivity(intent);
+            finish();
+
+        }
+
+        else if (currentFragment instanceof Upcoming_Exam) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();

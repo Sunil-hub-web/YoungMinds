@@ -53,20 +53,26 @@ public class ConfirmPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (edt_newpass.getText().length() == 0) {
+                if (edt_newpass.getText().length() == 0)
+                {
                     Toast.makeText(ConfirmPassword.this, "Enter New Password", Toast.LENGTH_SHORT).show();
 
-                } else if (edt_cnf_pass.getText().length() == 0) {
+                }
+                else if (edt_cnf_pass.getText().length() == 0)
+                {
                     Toast.makeText(ConfirmPassword.this, "Enter Confirm Password", Toast.LENGTH_SHORT).show();
 
-                }else if  (!validate()){
+                }
+                else if  (!validate())
+                {
 
                     Toast.makeText(getApplicationContext(),"Confirm and new Password didn't match",Toast.LENGTH_SHORT).show();
-                }else {
+
+                }
+                else
+                    {
 
                     getConfirmedPassword(edt_newpass.getText().toString(),edt_cnf_pass.getText().toString());
-
-
                 }
             }
         });

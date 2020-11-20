@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.egk.egk">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.egk.payumoney.BaseApplication"
         android:allowBackup="true"
@@ -15,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name="com.egk.activites.GlosseryActivity"></activity>
+        <activity android:name=".BasicGkList"></activity>
+        <activity android:name="com.egk.activites.GlosseryActivity" />
         <activity android:name="com.egk.activites.ReportActivity" />
         <activity android:name="com.egk.activites.MonthlyActivity" />
         <activity android:name="com.egk.activites.MatchPointActivity" />
@@ -60,7 +63,5 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

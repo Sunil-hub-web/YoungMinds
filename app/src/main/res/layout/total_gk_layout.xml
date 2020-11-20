@@ -44,6 +44,7 @@
         android:layout_toRightOf="@+id/catname"
         android:layout_marginTop="15dp"
         android:textSize="12dp"
+
         android:textColor="@color/colorview"/>
 
     </RelativeLayout>

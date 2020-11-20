@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +25,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.egk.activites.ViewActivity;
 import com.egk.adapter.TestPaperAdapter;
 import com.egk.egk.R;
@@ -42,6 +32,13 @@ import com.egk.extra.AppSingleton;
 import com.egk.extra.RecyclerTouchListener;
 import com.egk.extra.ViewDialog;
 import com.egk.gettersetter.TestPeperGetterSetter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class PreviousTestPAper_Fragment extends Fragment {
@@ -287,9 +284,6 @@ String catname,catId,currentyear;
                                 String testPaperTitle = jsonSubJson.getString("past_paper_name");
                                 String testPaperDesc = jsonSubJson.getString("past_paper_desc");
                                 String source = "";
-
-
-
                                 testPaperArary.add(new TestPeperGetterSetter(testPaperId, testPaperTitle, testPaperDesc, source));
 
                             }

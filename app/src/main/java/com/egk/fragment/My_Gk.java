@@ -21,12 +21,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
 import com.egk.activites.GkCategory;
 import com.egk.activites.ViewGk;
 import com.egk.adapter.GktotalAdapter;
@@ -35,6 +29,11 @@ import com.egk.extra.AppSingleton;
 import com.egk.extra.RecyclerTouchListener;
 import com.egk.extra.ViewDialog;
 import com.egk.gettersetter.GkGetSet;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class My_Gk extends Fragment {

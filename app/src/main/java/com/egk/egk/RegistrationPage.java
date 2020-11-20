@@ -19,15 +19,11 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.egk.extra.AppSingleton;
 import com.egk.extra.SessionManager;
 import com.egk.extra.ViewDialog;
+
+import org.json.JSONObject;
 
 public class RegistrationPage extends AppCompatActivity {
     TextView txt_sinin;
@@ -117,6 +113,7 @@ public class RegistrationPage extends AppCompatActivity {
         String g = "\",\"address\":\"";
         String i = "\",\"occupation\":\"";
         String j = "\",\"dob\":\"";
+
         String h = "\"}";
 
         String url = "https://egknow.com/service-web/webservice.php?method=userRegistration&data=" + a + name + b + mobile + c + email + d + pasword

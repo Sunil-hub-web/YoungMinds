@@ -6,15 +6,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.egk.egk.R;
+import com.egk.fragment.My_Notifications;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,10 +27,6 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.egk.egk.Egk_nav;
-import com.egk.egk.R;
-import com.egk.fragment.My_Notifications;
 
 public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
 
@@ -83,22 +82,25 @@ public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
         head.setText(removeHtml(titlehead));
 //        description.setText(removeHtml(descriptionvalue));
         categoryname.setText(removeHtml(catname));
+try {
+    String strCurrentDate = getIntent().getStringExtra("date");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    Date newDate = null;
+    try {
+        newDate = format.parse(strCurrentDate);
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
 
-        String strCurrentDate = getIntent().getStringExtra("date");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date newDate = null;
-        try {
-            newDate = format.parse(strCurrentDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        format = new SimpleDateFormat("dd-MM-yyyy");
-        String dt = format.format(newDate);
+    format = new SimpleDateFormat("dd-MM-yyyy");
+    String dt = format.format(newDate);
 
 //        holder.date.setText("  -  "+dt);
 
-        date.setText("Date : "+dt);
+    date.setText("Date : " + dt);
+}catch(Exception e){
+    date.setVisibility(View.GONE);
+}
 
 
         source = getIntent().getStringExtra("description");
