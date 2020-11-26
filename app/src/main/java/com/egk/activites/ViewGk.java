@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -77,11 +78,24 @@ public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
         categoryname = (TextView) findViewById(R.id.categoryname);
         date = (TextView) findViewById(R.id.date);
 
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
 
-        title.setText(removeHtml(titlevalue));
-        head.setText(removeHtml(titlehead));
+            title.setText(Html.fromHtml(titlevalue,Html.FROM_HTML_MODE_COMPACT));
+            head.setText(Html.fromHtml(titlehead,Html.FROM_HTML_MODE_COMPACT));
 //        description.setText(removeHtml(descriptionvalue));
-        categoryname.setText(removeHtml(catname));
+            categoryname.setText(Html.fromHtml(catname,Html.FROM_HTML_MODE_COMPACT));
+
+
+        }else{
+            title.setText(Html.fromHtml(titlevalue));
+            head.setText(Html.fromHtml(titlehead));
+//        description.setText(removeHtml(descriptionvalue));
+            categoryname.setText(Html.fromHtml(catname));
+
+        }
+
+
+
 try {
     String strCurrentDate = getIntent().getStringExtra("date");
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
