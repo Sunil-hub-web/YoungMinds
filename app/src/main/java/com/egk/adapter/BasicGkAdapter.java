@@ -17,25 +17,25 @@ import com.egk.egk.Recy_recy_items;
 
 import java.util.ArrayList;
 
-public class Gk_adapter extends RecyclerView.Adapter<Gk_adapter.ProgramViewHolder> {
+public class BasicGkAdapter extends RecyclerView.Adapter<BasicGkAdapter.ProgramViewHolder> {
     private ArrayList<Recy_recy_items> maarylis;
     Context context;
-//    ImageLoader imageLoader = AppSingleton.getInstance(context).getImageLoader();
-    public  Gk_adapter(ArrayList<Recy_recy_items> maarylis,Context context) {
+    //    ImageLoader imageLoader = AppSingleton.getInstance(context).getImageLoader();
+    public  BasicGkAdapter(ArrayList<Recy_recy_items> maarylis,Context context) {
         this.maarylis = maarylis;
         this.context = context;
     }
     @NonNull
     @Override
-    public Gk_adapter.ProgramViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int Position ) {
+    public BasicGkAdapter.ProgramViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int Position ) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.gk_rcy_item,parent,false);
-        return new Gk_adapter.ProgramViewHolder(view);
+        View view=inflater.inflate(R.layout.basic_recycle_view,parent,false);
+        return new BasicGkAdapter.ProgramViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(Gk_adapter.ProgramViewHolder holder, int Position) {
+    public void onBindViewHolder(BasicGkAdapter.ProgramViewHolder holder, int Position) {
         final Recy_recy_items My_list =maarylis.get(Position);
 
         holder.conetwotxt.setText(removeHtml(My_list.getCategroyName()));
@@ -67,7 +67,7 @@ public class Gk_adapter extends RecyclerView.Adapter<Gk_adapter.ProgramViewHolde
 
     public class ProgramViewHolder extends RecyclerView.ViewHolder {
         NetworkImageView coneimg;
-                ImageView conetwoimg;
+        ImageView conetwoimg;
         TextView gktxt,conetwotxt;
         public ProgramViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,5 +98,3 @@ public class Gk_adapter extends RecyclerView.Adapter<Gk_adapter.ProgramViewHolde
         return html;
     }
 }
-
-

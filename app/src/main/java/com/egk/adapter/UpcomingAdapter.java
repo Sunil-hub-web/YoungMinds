@@ -1,8 +1,10 @@
 package com.egk.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +52,17 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 
 //        holder.date.setText("  -  "+dt);
 
-        myViewHolder.txt_datt.setText("Date : "+dt);
-        myViewHolder.Descriptions.setText(description);
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
+
+                        myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt,Html.FROM_HTML_MODE_COMPACT));
+            myViewHolder.Descriptions.setText(Html.fromHtml(description,Html.FROM_HTML_MODE_COMPACT));
+        }else{
+
+            myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt));
+            myViewHolder.Descriptions.setText(Html.fromHtml(description));
+
+        }
     }
 
     @Override

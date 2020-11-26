@@ -20,7 +20,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.egk.adapter.Gk_adapter;
+import com.egk.adapter.BasicGkAdapter;
 import com.egk.egk.BasicGkList;
 import com.egk.egk.R;
 import com.egk.egk.Recy_recy_items;
@@ -121,7 +121,7 @@ public class BasicGk extends Fragment {
 
                                 caterogotyArraylist.add(new Recy_recy_items(categorry_ID,category_name, "category_icon"));
                             }
-                            Gk_adapter adapter = new Gk_adapter(caterogotyArraylist, getActivity());
+                            BasicGkAdapter adapter = new BasicGkAdapter(caterogotyArraylist, getActivity());
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             recyclerView.setAdapter(adapter);
