@@ -3,14 +3,16 @@ package com.egk.egk;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.egk.adapter.Notification_Adapter;
+import com.egk.extra.AppSingleton;
 import com.egk.extra.SessionManager;
 import com.egk.fragment.BasicGk;
 import com.egk.fragment.ChangePassword;
@@ -39,6 +52,10 @@ import com.egk.fragment.Recharge_point;
 import com.egk.fragment.Report;
 import com.egk.fragment.Todays;
 import com.egk.fragment.Upcoming_Exam;
+import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import static com.egk.egk.R.id.screen_area;
 
@@ -47,7 +64,7 @@ public class Egk_nav extends AppCompatActivity
     private Boolean exit = false;
     SessionManager sesion;
 
-    public static TextView headtitle;
+    public static TextView headtitle, noticount;
     public static ImageView notification,egk_logo;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +77,7 @@ public class Egk_nav extends AppCompatActivity
         notification=(ImageView)findViewById(R.id.notification);
         egk_logo=(ImageView)findViewById(R.id.egk_logo);
         headtitle = (TextView) findViewById(R.id.title);
+        noticount = (TextView) findViewById(R.id.noticount);
 
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +111,8 @@ public class Egk_nav extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_home);
+
+
     }
 
     @Override
@@ -292,6 +312,24 @@ public class Egk_nav extends AppCompatActivity
             egk_logo.setVisibility(View.GONE);
             fragment = new PreviousTestPAper_Fragment();
 
+        }
+        else if (id == R.id.nav_upcoming) {
+            headtitle.setText("Upcoming Exam");
+            egk_logo.setVisibility(View.GONE);
+            fragment = new Upcoming_Exam();
+
+        }
+        else if (id == R.id.nav_basicgk) {
+            headtitle.setText("Basic GK");
+            egk_logo.setVisibility(View.GONE);
+            fragment = new BasicGk();
+
+        }
+        else if (id == R.id.nav_rechargepoint) {
+            headtitle.setText("Recharge Point");
+            egk_logo.setVisibility(View.GONE);
+            fragment = new Recharge_point();
+
         }else if (id == R.id.nav_eqkquiz) {
             headtitle.setText("Egk Quiz");
             egk_logo.setVisibility(View.GONE);
@@ -418,4 +456,67 @@ public class Egk_nav extends AppCompatActivity
         }
     }
 
+    public void getNotification() {
+
+        String url = "https://egknow.com/service-web/webservice.php?method=getusrNotifCount&data={\"user_id\":\""+sesion.getUserID()+"\"}";
+
+        Log.d("notification", url);
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(Egk_nav.this);
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("notificationresponse", response.toString());
+                        String REsult = response.toString();
+
+                        try {
+                            JSONObject jsonObjMain = new JSONObject(REsult);
+                            String statuse = jsonObjMain.getString("success");
+                            if(statuse.equalsIgnoreCase("true")){
+                                String notification_cnt = jsonObjMain.getString("notification_cnt");
+                                if(notification_cnt.equalsIgnoreCase("0")){
+                                    noticount.setText("");
+                                }else{
+                                    noticount.setText(notification_cnt);
+                                }
+                            }
+
+
+                        } catch (Exception r) {
+
+                            Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
+//                            Toast.makeText(getApplicationContext(), "Successfully Logined", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("Ranjeet", "Error: " + error.getMessage());
+                // hide the progress dialog
+
+//               getValues();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+
+                    // ...
+                }
+            }
+        });
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppSingleton.getInstance(Egk_nav.this).addToRequestQueue(jsonObjReq, url);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getNotification();
+    }
 }

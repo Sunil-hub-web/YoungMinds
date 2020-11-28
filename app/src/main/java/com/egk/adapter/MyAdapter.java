@@ -2,7 +2,6 @@ package com.egk.adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,8 @@ import com.egk.extra.AppSingleton;
 import com.egk.gettersetter.SliderGetSet;
 
 import java.util.List;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 public class MyAdapter  extends PagerAdapter {
 

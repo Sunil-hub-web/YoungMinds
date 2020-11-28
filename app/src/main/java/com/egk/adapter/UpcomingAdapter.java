@@ -2,12 +2,14 @@ package com.egk.adapter;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.egk.egk.R;
@@ -53,16 +55,21 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 //        holder.date.setText("  -  "+dt);
 
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
+        Spanned htmlAsSpanned = Html.fromHtml(description); // used by TextView
+        Spanned htmlAsSpanneddt = Html.fromHtml(dt); // used by TextView
 
-                        myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt,Html.FROM_HTML_MODE_COMPACT));
-            myViewHolder.Descriptions.setText(Html.fromHtml(description,Html.FROM_HTML_MODE_COMPACT));
-        }else{
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
 
-            myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt));
-            myViewHolder.Descriptions.setText(Html.fromHtml(description));
-
-        }
+                        myViewHolder.txt_datt.setText("Date : " + htmlAsSpanneddt);
+            myViewHolder.Descriptions.setText(htmlAsSpanned);
+        myViewHolder.webview.getSettings().setJavaScriptEnabled(true);
+        myViewHolder.webview.loadDataWithBaseURL(null, description, "text/html", "utf-8", null);
+//        }else{
+//
+//            myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt));
+//            myViewHolder.Descriptions.setText(Html.fromHtml(description));
+//
+//        }
     }
 
     @Override
@@ -73,11 +80,13 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txt_datt,Descriptions;
+        WebView webview;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txt_datt=(TextView)itemView.findViewById(R.id.txt_datt);
             Descriptions=(TextView)itemView.findViewById(R.id.Description);
+            webview=(WebView)itemView.findViewById(R.id.webview);
 
 
         }

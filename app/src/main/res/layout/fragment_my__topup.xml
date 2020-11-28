@@ -9,11 +9,11 @@
         android:layout_height="1dp"
         android:background="#EAE6E5"
         />
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_topup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

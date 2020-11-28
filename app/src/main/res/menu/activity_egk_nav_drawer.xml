@@ -48,6 +48,16 @@
             android:id="@+id/nav_test_paper"
             android:icon="@drawable/samplepapernav"
             android:title="Sample Papers"/>
+
+        <item
+            android:id="@+id/nav_upcoming"
+            android:icon="@drawable/menu_upcoming"
+            android:title="Upcoming Exam"/>
+
+        <item
+            android:id="@+id/nav_basicgk"
+            android:icon="@drawable/menu_basic_gk"
+            android:title="Basic GK"/>
         <item
             android:id="@+id/nav_eqkquiz"
             android:icon="@drawable/quiznav"
@@ -60,6 +70,10 @@
             android:id="@+id/nav_notification"
             android:icon="@drawable/notificationnav"
             android:title="Notification" />
+        <item
+            android:id="@+id/nav_rechargepoint"
+            android:icon="@drawable/menu_recharge_point"
+            android:title="Recharge Point" />
         <item
             android:id="@+id/nav_transactions"
             android:icon="@drawable/transactionnav"

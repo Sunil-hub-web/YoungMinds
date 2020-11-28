@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="20dp">
 
         <TextView
@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date"
+            android:visibility="gone"
             android:fontFamily="sans-serif"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
@@ -35,6 +36,10 @@
             android:textColor="@color/colorview"/>
 
 
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
     <View

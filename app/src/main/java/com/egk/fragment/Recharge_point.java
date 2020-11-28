@@ -1,9 +1,11 @@
 package com.egk.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,7 @@ public class Recharge_point extends Fragment {
 
     ViewDialog progressDialog;
     ImageView go;
-    String catname,catId,currentyear;
+    String catname, catId, currentyear;
     EditText category;
     TextView nodata;
 
@@ -53,6 +55,7 @@ public class Recharge_point extends Fragment {
 
         progressDialog = new ViewDialog(getActivity());
 
+        nodata = (TextView) v.findViewById(R.id.nodata);
         recyclerView = (RecyclerView) v.findViewById(R.id.rechargepoint_recyclerview);
 
 
@@ -61,10 +64,9 @@ public class Recharge_point extends Fragment {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(category.getText().toString().length()==0){
+                if (category.getText().toString().length() == 0) {
                     Toast.makeText(getActivity().getApplicationContext(), "Enter the Pincode", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     getPatnerdetails(category.getText().toString());
                 }
             }
@@ -75,13 +77,13 @@ public class Recharge_point extends Fragment {
     }
 
 
-    public void getPatnerdetails(String pincode){
+    public void getPatnerdetails(String pincode) {
         String a = "{\"pincode\":\"";
         String b = "\",\"category_id\":\"";
         String c = "\"}";
 
 //        https://egknow.com/Web_Service/web_service.php?method=GetPartners&data={"pincode":"765100"}
-        String url = "https://egknow.com/Web_Service/web_service.php?method=GetPartners&data="+a+pincode+c;
+        String url = "https://egknow.com/Web_Service/web_service.php?method=GetPartners&data=" + a + pincode + c;
 
         progressDialog.showDialog();
 
@@ -98,37 +100,38 @@ public class Recharge_point extends Fragment {
                         progressDialog.hideDialog();
 
                         try {
-                            rechrgeGet.clear();
-
+                            rechrgeGet = new ArrayList<RechargePointSetget>();
 
 
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
 
                             JSONArray jsonArray = jsonObjMain.getJSONArray("partners");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-
-                                JSONObject jsonSubJson = jsonArray.getJSONObject(i);
-                                String name = jsonSubJson.getString("name");
-                                String email = jsonSubJson.getString("email");
-                                String mobile = jsonSubJson.getString("mobile");
-                                String source = "";
-
-
-
-                                rechrgeGet.add(new RechargePointSetget(name,mobile, email,"address", "city", "pincode", "gender") );
-
-
-                            }
-
-
-                            RechargePointAdapter adapter = new RechargePointAdapter(rechrgeGet,getActivity());
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            recyclerView.setAdapter(adapter);
-
-                            if (rechrgeGet.size()==0) {
+                            if (jsonArray.length() == 0) {
                                 nodata.setVisibility(View.VISIBLE);
+                            } else {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+
+                                    JSONObject jsonSubJson = jsonArray.getJSONObject(i);
+                                    String name = jsonSubJson.getString("name");
+                                    String email = jsonSubJson.getString("email");
+                                    String mobile = jsonSubJson.getString("mobile");
+                                    String source = "";
+
+
+                                    rechrgeGet.add(new RechargePointSetget(name, mobile, email, "address", "city", "pincode", "gender"));
+
+
+                                }
+
+
+                                RechargePointAdapter adapter = new RechargePointAdapter(rechrgeGet, getActivity());
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                recyclerView.setAdapter(adapter);
+
+
+                                nodata.setVisibility(View.GONE);
                             }
 
 

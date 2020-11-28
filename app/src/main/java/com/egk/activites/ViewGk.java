@@ -8,12 +8,15 @@ import android.graphics.drawable.LevelListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,11 +32,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
+public class ViewGk extends AppCompatActivity {
 
-    TextView title, description, categoryname, date, head;
-    String descriptionvalue,titlevalue,titlehead,catname;
+    TextView title, categoryname, date, head;
+    String descriptionvalue, titlevalue, titlehead, catname;
     ImageView notification;
+    WebView description;
     private final static String TAG = "TestImageGetter";
     String source = "";
 
@@ -45,18 +49,18 @@ public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        titlehead=getIntent().getStringExtra("catname");
+        titlehead = getIntent().getStringExtra("catname");
 //        descriptionvalue= getIntent().getStringExtra("description");
-        titlevalue=getIntent().getStringExtra("title");
-        catname=getIntent().getStringExtra("catname");
+        titlevalue = getIntent().getStringExtra("title");
+        catname = getIntent().getStringExtra("catname");
 
-        notification= (ImageView) findViewById(R.id.notification);
+        notification = (ImageView) findViewById(R.id.notification);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm=getSupportFragmentManager();
-                My_Notifications fragment= new My_Notifications();
-                fm.beginTransaction().replace(R.id.relativemain,fragment).commit();
+                FragmentManager fm = getSupportFragmentManager();
+                My_Notifications fragment = new My_Notifications();
+                fm.beginTransaction().replace(R.id.relativemain, fragment).commit();
 
             }
         });
@@ -70,23 +74,25 @@ public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
             }
         });
 
-        Log.d("ranjeetTesting","runnning  n comming n going");
+        Log.d("ranjeetTesting_title", "" + titlehead);
+        Log.d("ranjeetTesting_head", "" + titlevalue);
+        Log.d("ranjeetTesting_cat", "" + catname);
 
         head = (TextView) findViewById(R.id.head);
         title = (TextView) findViewById(R.id.title);
-        description = (TextView) findViewById(R.id.description);
+        description = (WebView) findViewById(R.id.description);
         categoryname = (TextView) findViewById(R.id.categoryname);
         date = (TextView) findViewById(R.id.date);
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
-            title.setText(Html.fromHtml(titlevalue,Html.FROM_HTML_MODE_COMPACT));
-            head.setText(Html.fromHtml(titlehead,Html.FROM_HTML_MODE_COMPACT));
+            title.setText(Html.fromHtml(titlevalue, Html.FROM_HTML_MODE_COMPACT));
+            head.setText(Html.fromHtml(titlehead, Html.FROM_HTML_MODE_COMPACT));
 //        description.setText(removeHtml(descriptionvalue));
-            categoryname.setText(Html.fromHtml(catname,Html.FROM_HTML_MODE_COMPACT));
+            categoryname.setText(Html.fromHtml(catname, Html.FROM_HTML_MODE_COMPACT));
 
+        } else {
 
-        }else{
             title.setText(Html.fromHtml(titlevalue));
             head.setText(Html.fromHtml(titlehead));
 //        description.setText(removeHtml(descriptionvalue));
@@ -95,109 +101,30 @@ public class ViewGk extends AppCompatActivity implements Html.ImageGetter{
         }
 
 
+        try {
+            String strCurrentDate = getIntent().getStringExtra("date");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date newDate = null;
+            try {
+                newDate = format.parse(strCurrentDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-try {
-    String strCurrentDate = getIntent().getStringExtra("date");
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    Date newDate = null;
-    try {
-        newDate = format.parse(strCurrentDate);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-
-    format = new SimpleDateFormat("dd-MM-yyyy");
-    String dt = format.format(newDate);
+            format = new SimpleDateFormat("dd-MM-yyyy");
+            String dt = format.format(newDate);
 
 //        holder.date.setText("  -  "+dt);
 
-    date.setText("Date : " + dt);
-}catch(Exception e){
-    date.setVisibility(View.GONE);
-}
+            date.setText("Date : " + dt);
+        } catch (Exception e) {
+            date.setVisibility(View.GONE);
+        }
 
 
         source = getIntent().getStringExtra("description");
-        Spanned spanned = Html.fromHtml(source, this, null);
-        description.setText(spanned);
-    }
-
-
-    private String removeHtml(String html) {
-        html = html.replaceAll("<(.*?)\\>"," ");
-        html = html.replaceAll("<(.*?)\\\n"," ");
-        html = html.replaceFirst("(.*?)\\>", " ");
-        html = html.replaceAll("&#039;s"," ");
-        html = html.replaceAll("&amp;","&");
-        html = html.replaceAll("&#39;","'");
-        html = html.replaceAll("&nbsp;","");
-        html = html.replaceAll("&amp;"," & ");
-        html = html.replaceAll("&rsquo;s"," ");
-        html = html.replaceAll("&rsquo;"," ");
-        html = html.replaceAll("&ldquo;"," ");
-        html = html.replaceAll("&rdquo;"," ");
-        html = html.replaceAll("&quot;;","");
-        html = html.replaceAll("&quot;","");
-        html = html.replaceAll("&lsquo;","");
-
-
-
-        return html;
-    }
-
-
-    @Override
-    public Drawable getDrawable(String source) {
-        LevelListDrawable d = new LevelListDrawable();
-//        Drawable empty = getResources().getDrawable(R.drawable.app_icon);
-//        d.addLevel(0, 0, empty);
-//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-
-        new LoadImage().execute(source, d);
-
-        return d;
-    }
-
-    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
-
-        private LevelListDrawable mDrawable;
-
-        @Override
-        protected Bitmap doInBackground(Object... params) {
-            String source = (String) params[0];
-            mDrawable = (LevelListDrawable) params[1];
-            Log.d(TAG, "doInBackground " + source);
-            try {
-                InputStream is = new URL(source).openStream();
-                return BitmapFactory.decodeStream(is);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Log.d("rgvc", String.valueOf(e));
-            } catch (MalformedURLException e) {
-                Log.d("rgvc", String.valueOf(e));
-                e.printStackTrace();
-            } catch (IOException e) {
-                Log.d("rgvc", String.valueOf(e));
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            Log.d(TAG, "onPostExecute drawable " + mDrawable);
-            Log.d(TAG, "onPostExecute bitmap " + bitmap);
-            if (bitmap != null) {
-                BitmapDrawable d = new BitmapDrawable(bitmap);
-                mDrawable.addLevel(1, 1, d);
-                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                mDrawable.setLevel(1);
-                // i don't know yet a better way to refresh TextView
-                // mTv.invalidate() doesn't work as expected
-                CharSequence t = description.getText();
-                description.setText(t);
-            }
-        }
+        description.getSettings().setJavaScriptEnabled(true);
+        description.loadDataWithBaseURL(null, source, "text/html", "utf-8", null);;
     }
 
 

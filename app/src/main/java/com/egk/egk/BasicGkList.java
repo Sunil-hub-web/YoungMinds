@@ -2,10 +2,12 @@ package com.egk.egk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ public class BasicGkList extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<BasicGkListGetSet> categorynewslist = new ArrayList<BasicGkListGetSet>();
     TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,8 @@ public class BasicGkList extends AppCompatActivity {
         title = findViewById(R.id.title);
         title.setText(getIntent().getStringExtra("title"));
 
-        gk_backicon=(ImageView)findViewById(R.id.gk_backicon);
-        recyclerView = (RecyclerView)findViewById(R.id.rcy_gk_list);
+        gk_backicon = (ImageView) findViewById(R.id.gk_backicon);
+        recyclerView = (RecyclerView) findViewById(R.id.rcy_gk_list);
 
         gk_backicon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +65,10 @@ public class BasicGkList extends AppCompatActivity {
 
         String id = getIntent().getStringExtra("id");
 
-getGkLsit(id);
+        getGkLsit(id);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             Fragment intent1 = null;
-
 
 
             @Override
@@ -76,15 +78,11 @@ getGkLsit(id);
 
 
                 Intent i = new Intent(getApplicationContext(), ViewGk.class);
-                i.putExtra("title",itemname.getGk_title());
-                i.putExtra("description",itemname.getGk_desc());
-                i.putExtra("catname",itemname.getCategory_id());
+                i.putExtra("title", itemname.getGk_title());
+                i.putExtra("description", itemname.getGk_desc());
+                i.putExtra("catname", itemname.getCategory_id());
 //                i.putExtra("date",itemname.getGk_date());
                 startActivity(i);
-
-
-
-
 
 
             }
@@ -98,16 +96,15 @@ getGkLsit(id);
         }));
 
 
-
     }
 
 
-    public void getGkLsit(String id){
+    public void getGkLsit(String id) {
 
         String a = "{\"Category_id\":\"";
 //        String b = "\",\"password\":\"";
         String c = "\"}";
-        String url = "https://egknow.com/Web_Service/web_service.php?method=GetBasicGk&data="+a+id+c;
+        String url = "https://egknow.com/Web_Service/web_service.php?method=GetBasicGk&data=" + a + id + c;
 
         progressDialog.showDialog();
         Log.d("Receive", url);
@@ -129,7 +126,7 @@ getGkLsit(id);
                             String statuse = jsonObjMain.getString("success");
 
                             JSONArray jsonArray = jsonObjMain.getJSONArray("basic_gk");
-                            for (int i = 0 ;i<jsonArray.length();i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonSubJson = jsonArray.getJSONObject(i);
                                 String gk_id = jsonSubJson.getString("basicgk_id");
@@ -137,7 +134,7 @@ getGkLsit(id);
                                 String gk_title = jsonSubJson.getString("title");
                                 String category_id = jsonSubJson.getString("category_id");
 
-                                categorynewslist.add(new BasicGkListGetSet(gk_id, category_id,gk_title, gk_desc));
+                                categorynewslist.add(new BasicGkListGetSet(gk_id, category_id, gk_title, gk_desc));
 
                             }
 
@@ -176,8 +173,6 @@ getGkLsit(id);
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq, url);
-
-
 
 
     }

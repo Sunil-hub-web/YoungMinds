@@ -2,7 +2,9 @@ package com.egk.egk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,13 +24,18 @@ import com.android.volley.toolbox.Volley;
 import com.egk.extra.AppSingleton;
 import com.egk.extra.SessionManager;
 import com.egk.extra.ViewDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
 public class RegistrationPage extends AppCompatActivity {
     TextView txt_sinin;
     RelativeLayout btn_signUp;
-
+    String token;
     EditText edt_name, edt_mob_no, edt_email, edt_pswd, edt_confrin_pswd;
     ViewDialog progressDialog;
     SessionManager session;
@@ -56,6 +63,28 @@ public class RegistrationPage extends AppCompatActivity {
                 startActivity(intetnLogin);
             }
         });
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("32wfegh1", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        token = task.getResult().getToken();
+
+                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d("32wfegh", token);
+//                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         btn_signUp = findViewById(R.id.btn_signUp);
 
@@ -112,12 +141,13 @@ public class RegistrationPage extends AppCompatActivity {
         String f = "\",\"city\":\"";
         String g = "\",\"address\":\"";
         String i = "\",\"occupation\":\"";
+        String m = "\",\"fcm_id\":\"";
         String j = "\",\"dob\":\"";
 
         String h = "\"}";
 
         String url = "https://egknow.com/service-web/webservice.php?method=userRegistration&data=" + a + name + b + mobile + c + email + d + pasword
-                + e + " " + f + " " + g + " " + i + " " + j + " " + h;
+                + e + " " + f + " " + g + " " + i + " " + j + " " + m + token + h;
         Log.d("RanjeetUrlCheck", url);
 
         url = url.replaceAll("\\s", "%20");

@@ -1,11 +1,11 @@
 package com.egk.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,22 +38,20 @@ public class HomeFragment extends Fragment {
             R.drawable.report,
 
             R.drawable.exampapers,
+            R.drawable.upcoming_exam,
+            R.drawable.basic_gk,
+
             R.drawable.quiz,
             R.drawable.offers,
-
-
-
             R.drawable.notification,
+
+            R.drawable.recharge_point,
             R.drawable.transaction,
             R.drawable.topup,
 
-
-            R.drawable.upcoming_exam,
-            R.drawable.basic_gk,
-            R.drawable.recharge_point
-
     };
     String[] names = {
+
             "Today's",
             "Monthly GK",
             "Category GK",
@@ -63,16 +61,16 @@ public class HomeFragment extends Fragment {
             "Report",
 
             "Sample Papers",
-            "Quiz",
-            "Offers",
-
-            "Notification",
-            "Transactions",
-            "Top Up",
-
             "Upcoming Exam",
             "Basic GK",
-            "Recharge Point"
+
+            "Quiz",
+            "Offers",
+            "Notification",
+
+            "Recharge Point",
+            "Transactions",
+            "Top Up",
 
     };
 
@@ -141,52 +139,52 @@ public class HomeFragment extends Fragment {
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     getFragmentValue(o);
                 }
-                else if(position == 7){
+                else if(position == 9){
                     Egk_nav.headtitle.setText("Egk Quiz");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment o = new EgkQuiz();
                     getFragmentValue(o);
                 }
-                else if (position == 8) {
+                else if (position == 10) {
                     Egk_nav.headtitle.setText("Offers");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment m = new My_Offers();
                     getFragmentValue(m);
 
                 }
-                else if (position == 9) {
+                else if (position == 11) {
                     Egk_nav.headtitle.setText("Notifications");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment n = new My_Notifications();
                     getFragmentValue(n);
-                }else if (position == 10) {
+                }else if (position == 13) {
                     Egk_nav.headtitle.setText("Transactions");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment j = new My_Transaction();
                     getFragmentValue(j);
 
                 }
-                else if (position == 11) {
+                else if (position == 14) {
                     Egk_nav.headtitle.setText("Top Up");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment l = new My_Topup();
                     getFragmentValue(l);
 
                 }
-                else if(position ==12){
+                else if(position ==7){
                     Egk_nav.headtitle.setText("Upcoming Exam");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment m = new Upcoming_Exam();
                     getFragmentValue(m);
                 }
 
-                else if(position ==13){
+                else if(position ==8){
                     Egk_nav.headtitle.setText("Basic GK");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment n = new BasicGk();
                     getFragmentValue(n);
                 }
-                else if(position ==14){
+                else if(position ==12){
                     Egk_nav.headtitle.setText("Recharge Point");
                     Egk_nav.egk_logo.setVisibility(View.GONE);
                     Fragment o = new Recharge_point();

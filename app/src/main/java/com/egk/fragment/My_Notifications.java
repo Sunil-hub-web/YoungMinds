@@ -1,9 +1,11 @@
 package com.egk.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,16 +29,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.egk.adapter.Notification_Adapter;
+import com.egk.egk.Egk_nav;
 import com.egk.egk.Notification_recy_list;
 import com.egk.egk.R;
 import com.egk.extra.AppSingleton;
+import com.egk.extra.SessionManager;
 import com.egk.extra.ViewDialog;
 
 
 public class My_Notifications extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Notification_recy_list> NotificationArraylist = new ArrayList<>();
-
+    SessionManager sesion;
     ViewDialog progressDialog;
 
     @Override
@@ -45,6 +49,9 @@ public class My_Notifications extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         // Inflate the viewquiz for this fragment
         View v = inflater.inflate(R.layout.fragment_my__notifications, container, false);
+
+        sesion = new SessionManager(getActivity());
+
         recyclerView = (RecyclerView) v.findViewById(R.id.rcy_notification);
 
         progressDialog = new ViewDialog(getActivity());
@@ -94,7 +101,7 @@ public class My_Notifications extends Fragment {
                             recyclerView.setAdapter(adapter);
 
 
-
+                            setNotification();
                         } catch (Exception r) {
                             progressDialog.hideDialog();
                             Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
@@ -113,6 +120,59 @@ public class My_Notifications extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 
                     Toast.makeText(getActivity(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+                    // ...
+                }
+            }
+        });
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, url);
+
+
+    }
+
+    public void setNotification() {
+
+        String url = "https://egknow.com/service-web/webservice.php?method=UserSeen&data={\"user_id\":\""+sesion.getUserID()+"\"}";
+
+        Log.d("notification", url);
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("notificationresponse", response.toString());
+                        String REsult = response.toString();
+
+                        try {
+                            JSONObject jsonObjMain = new JSONObject(REsult);
+                            String statuse = jsonObjMain.getString("success");
+                            if(statuse.equalsIgnoreCase("true")){
+
+                            }
+
+
+                        } catch (Exception r) {
+
+                            Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
+//                            Toast.makeText(getApplicationContext(), "Successfully Logined", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("Ranjeet", "Error: " + error.getMessage());
+                // hide the progress dialog
+
+//               getValues();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+
                     // ...
                 }
             }
