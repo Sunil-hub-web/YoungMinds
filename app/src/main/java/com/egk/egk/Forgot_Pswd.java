@@ -2,7 +2,9 @@ package com.egk.egk;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,42 +28,41 @@ import com.egk.extra.AppSingleton;
 import com.egk.extra.ViewDialog;
 
 public class Forgot_Pswd extends AppCompatActivity {
-EditText edt_efepswd;
-RelativeLayout btn_efesubmit;
+    EditText edt_efepswd;
+    RelativeLayout btn_efesubmit;
 
-ViewDialog progressDialog;
+    ViewDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setContentView(R.layout.activity_forgot__pswd);
-        edt_efepswd=(EditText)findViewById(R.id.edt_efepswd);
-        btn_efesubmit=(RelativeLayout)findViewById(R.id.btn_efesubmit);
+        edt_efepswd = (EditText) findViewById(R.id.edt_efepswd);
+        btn_efesubmit = (RelativeLayout) findViewById(R.id.btn_efesubmit);
 
-        progressDialog=new ViewDialog(this);
+        progressDialog = new ViewDialog(this);
         btn_efesubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edt_efepswd.getText().length() == 0) {
                     Toast.makeText(Forgot_Pswd.this, "Enter Phone Number", Toast.LENGTH_SHORT).show();
-            }
-            else {
+                } else {
                     getpassword(edt_efepswd.getText().toString());
 
                 }
-                }
+            }
 
         });
 
     }
 
 
-
     public void getpassword(String email) {
         String a = "{\"mobile\":\"";
         String b = "\"}";
-        String url ="https://egknow.com/service-web/webservice.php?method=userForgotPassword&data="+a+email+b;
+        String url = "https://egknow.com/service-web/webservice.php?method=userForgotPassword&data=" + a + email + b;
         progressDialog.showDialog();
         Log.d("RanjeetUrlCheck", url);
 
@@ -77,22 +78,21 @@ ViewDialog progressDialog;
                         try {
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
-                            if(statuse.equals("true")){
+                            if (statuse.equals("true")) {
 
                                 String uid = jsonObjMain.getString("u_id");
-                                Intent intent=new Intent(Forgot_Pswd.this,ForgotOTP.class);
-                                intent.putExtra("USERID",uid);
-                                intent.putExtra("mobile",edt_efepswd.getText().toString());
+                                Intent intent = new Intent(Forgot_Pswd.this, ForgotOTP.class);
+                                intent.putExtra("USERID", uid);
+                                intent.putExtra("mobile", edt_efepswd.getText().toString());
                                 startActivity(intent);
                                 finish();
                             }
 
 
-
                             if (statuse.equalsIgnoreCase("false")) {
                                 String err_msg = jsonObjMain.getString("err_msg");
 
-                               Toast.makeText(getApplicationContext(), err_msg, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), err_msg, Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (Exception r) {

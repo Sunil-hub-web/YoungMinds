@@ -1,5 +1,6 @@
 package com.egk.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,10 +20,14 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.egk.activites.ReportActivity;
+import com.egk.activites.UpcomingExamDetail;
 import com.egk.adapter.UpcomingAdapter;
 import com.egk.egk.R;
 import com.egk.extra.AppSingleton;
+import com.egk.extra.RecyclerTouchListener;
 import com.egk.extra.ViewDialog;
+import com.egk.gettersetter.ReportGetSet;
 import com.egk.gettersetter.UpcomingExam;
 
 import org.json.JSONArray;
@@ -42,13 +47,36 @@ public class Upcoming_Exam extends Fragment {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_upcoming__exam, container, false);
         recyclerView=(RecyclerView)v.findViewById(R.id.upcomingExam_recycle);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.e("mukesh", "" + position);
+                UpcomingExam itemname = upcomingGk.get(position);
+
+
+                Intent i = new Intent(getActivity(), UpcomingExamDetail.class);
+                i.putExtra("date",itemname.getDate());
+                i.putExtra("title",itemname.getExamTitle());
+                startActivity(i);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getActivity(), "Long press on position :" + position,
+                        Toast.LENGTH_LONG).show();
+
+            }
+        }));
+
         progressDialog=new ViewDialog(getActivity());
         getupComingExam();
         return v;
 
     }
 
-    public void  getupComingExam() {
+    public void getupComingExam() {
 
         String url = "https://egknow.com/Web_Service/web_service.php?method=GetUpcommingExam";
 

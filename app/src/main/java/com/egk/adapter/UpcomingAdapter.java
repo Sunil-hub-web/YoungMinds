@@ -61,9 +61,9 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 //        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
 
                         myViewHolder.txt_datt.setText("Date : " + htmlAsSpanneddt);
-            myViewHolder.Descriptions.setText(htmlAsSpanned);
-        myViewHolder.webview.getSettings().setJavaScriptEnabled(true);
-        myViewHolder.webview.loadDataWithBaseURL(null, description, "text/html", "utf-8", null);
+            myViewHolder.txt_title.setText(htmlAsSpanned);
+//        myViewHolder.webview.getSettings().setJavaScriptEnabled(true);
+//        myViewHolder.webview.loadDataWithBaseURL(null, description, "text/html", "utf-8", null);
 //        }else{
 //
 //            myViewHolder.txt_datt.setText("Date : " + Html.fromHtml(dt));
@@ -79,14 +79,15 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_datt,Descriptions;
-        WebView webview;
+        TextView txt_datt,Descriptions, txt_title;
+//        WebView webview;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            txt_title=(TextView)itemView.findViewById(R.id.txt_title);
             txt_datt=(TextView)itemView.findViewById(R.id.txt_datt);
             Descriptions=(TextView)itemView.findViewById(R.id.Description);
-            webview=(WebView)itemView.findViewById(R.id.webview);
+//            webview=(WebView)itemView.findViewById(R.id.webview);
 
 
         }

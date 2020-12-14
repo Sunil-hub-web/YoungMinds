@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+        <activity android:name="com.egk.activites.UpcomingExamDetail"></activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -27,7 +28,7 @@
         -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/white" />
+            android:resource="@color/colorAccent" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
@@ -38,7 +39,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".BasicGkList"></activity>
+        <activity android:name=".BasicGkList" />
         <activity android:name="com.egk.activites.GlosseryActivity" />
         <activity android:name="com.egk.activites.ReportActivity" />
         <activity android:name="com.egk.activites.MonthlyActivity" />
