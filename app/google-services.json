@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "227737968042",
+    "firebase_url": "https://egk-new.firebaseio.com",
+    "project_id": "egk-new",
+    "storage_bucket": "egk-new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227737968042:android:2d307e565392fa0e14dfd3",
+        "android_client_info": {
+          "package_name": "com.egk.egk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227737968042-kjj3k24a324q86gcfjrac6qrr2dt6v0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnHh4_YoPUQHeoMtepHuWV3bdCAF46kpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227737968042-kjj3k24a324q86gcfjrac6qrr2dt6v0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
