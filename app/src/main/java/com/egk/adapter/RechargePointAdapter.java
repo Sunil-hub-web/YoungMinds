@@ -35,7 +35,7 @@ public class RechargePointAdapter extends RecyclerView.Adapter<RechargePointAdap
     public void onBindViewHolder(@NonNull RechargePointAdapter.MyViewHolder myViewHolder, int i) {
         final RechargePointSetget My_list =reportGetSets.get(i);
         myViewHolder.name.setText(My_list.getName());
-        myViewHolder.email.setText(My_list.getEmail());
+        myViewHolder.email.setText(My_list.getAddress()+", "+My_list.getCity()+", "+My_list.getPincode());
         myViewHolder.mobile.setText(My_list.getMobile());
         myViewHolder.callnow.setOnClickListener(new View.OnClickListener() {
             @Override

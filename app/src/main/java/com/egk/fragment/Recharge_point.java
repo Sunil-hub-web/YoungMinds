@@ -116,10 +116,13 @@ public class Recharge_point extends Fragment {
                                     String name = jsonSubJson.getString("name");
                                     String email = jsonSubJson.getString("email");
                                     String mobile = jsonSubJson.getString("mobile");
-                                    String source = "";
+                                    String address = jsonSubJson.getString("address");
+                                    String city = jsonSubJson.getString("city");
+                                    String state = jsonSubJson.getString("state");
+                                    String pin = jsonSubJson.getString("pin");
 
 
-                                    rechrgeGet.add(new RechargePointSetget(name, mobile, email, "address", "city", "pincode", "gender"));
+                                    rechrgeGet.add(new RechargePointSetget(name, mobile, email, address, city, pin, "gender"));
 
 
                                 }

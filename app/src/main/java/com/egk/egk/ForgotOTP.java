@@ -79,7 +79,6 @@ public class ForgotOTP extends AppCompatActivity {
     }
 
 
-
     public void getOtp(String OTP){
 
         String a = "{\"otp\":\"";
