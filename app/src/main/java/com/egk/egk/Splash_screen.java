@@ -29,7 +29,6 @@ public class Splash_screen extends Activity {
         }
         else {
 
-
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

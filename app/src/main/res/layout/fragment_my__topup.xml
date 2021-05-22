@@ -2,8 +2,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.egk.fragment.My_Topup"
     android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/subscriptionlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:text="Subscription Details"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/sign_logo"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/package_nm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:text="Package : "
+                    android:textColor="@color/light_black"
+                    android:layout_below="@id/sign_logo"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"/>
+
+                <TextView
+                    android:id="@+id/expirydt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:text="Expiry Date : "
+                    android:textColor="@color/light_black"
+                    android:layout_below="@id/sign_logo"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"/>
+
+                <TextView
+                    android:id="@+id/remainingdys"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:text="Remaining Days : "
+                    android:textColor="@color/light_black"
+                    android:layout_below="@id/sign_logo"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"/>
+
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -12,8 +79,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_topup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp">
     </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
 
 </FrameLayout>

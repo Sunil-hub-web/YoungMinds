@@ -140,7 +140,7 @@ public class My_Transaction extends Fragment {
 
                                         String id = jsobjectitem.getString("id");
                                         String transaction_type = jsobjectitem.getString("transaction_type");
-                                        String package_id = jsobjectitem.getString("package_id");
+                                        String package_id = jsobjectitem.getString("package_name");
                                         String package_duration = jsobjectitem.getString("package_duration");
                                         String transaction_amount = jsobjectitem.getString("transaction_amount");
                                         String transaction_id = jsobjectitem.getString("transaction_id");

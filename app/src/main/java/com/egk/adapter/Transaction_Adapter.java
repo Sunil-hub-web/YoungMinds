@@ -8,7 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import com.egk.egk.R;
 import com.egk.egk.Transaction_list_item;
@@ -33,10 +38,22 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
     public void onBindViewHolder(Transaction_Adapter.ProgramViewHolder holder, int Position) {
         final Transaction_list_item My_list =maarylis.get(Position);
         holder.transaction_txt.setText(My_list.getTransaction_id());
-        holder.txt_time.setText(My_list.getTransaction_datetime());
+
         holder.txt_status.setText(My_list.getTransaction_type());
         holder.txt_price.setText("Rs. "+My_list.getTransaction_amount());
-        holder.packagename.setText(My_list.getPackage_duration());
+        holder.packagename.setText(My_list.getPackage_id());
+
+        try {
+            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("d MMM yyyy h:MM aa");
+            Date date = null;
+            date = originalFormat.parse(My_list.getTransaction_datetime());
+            String formattedDate = targetFormat.format(date);
+            holder.txt_time.setText(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 //        if(My_list.getTransaction_status().equalsIgnoreCase("Success")){
 //            holder.txt_status.setTextColor(Color.parseColor("#00F800"));
 //        }

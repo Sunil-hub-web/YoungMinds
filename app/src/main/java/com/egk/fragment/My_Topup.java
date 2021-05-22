@@ -8,9 +8,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -19,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -30,6 +34,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.egk.extra.Constants;
 import com.google.android.material.textfield.TextInputLayout;
 import com.payumoney.core.PayUmoneyConfig;
 import com.payumoney.core.PayUmoneyConstants;
@@ -50,9 +55,14 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,13 +82,15 @@ import static android.os.Looper.getMainLooper;
 public class My_Topup extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Topup_geterseter> joblist = new ArrayList<>();
-    ArrayList<String>categories=new ArrayList<String>();
+    ArrayList<String> categories = new ArrayList<String>();
     String amt, info = "topup";
     SessionManager session;
     ViewDialog progressDialog;
     String txnId;
+    TextView package_nm, expirydt, remainingdys;
+    CardView subscriptionlayout;
 
-//    PayU
+    //    PayU
     private boolean isDisableExitConfirmation = false;
     private SharedPreferences.Editor editor;
     private SharedPreferences settings;
@@ -90,7 +102,7 @@ public class My_Topup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the viewquiz for this fragment
-        View v= inflater.inflate(R.layout.fragment_my__topup, container, false);
+        View v = inflater.inflate(R.layout.fragment_my__topup, container, false);
 
 
         progressDialog = new ViewDialog(getActivity());
@@ -98,6 +110,11 @@ public class My_Topup extends Fragment {
         session = new SessionManager(getActivity());
         mAppPreference = new AppPreference();
         recyclerView = (RecyclerView) v.findViewById(R.id.rcy_topup);
+        subscriptionlayout = (CardView) v.findViewById(R.id.subscriptionlayout);
+        package_nm = (TextView) v.findViewById(R.id.package_nm);
+        expirydt = (TextView) v.findViewById(R.id.expirydt);
+        remainingdys = (TextView) v.findViewById(R.id.remainingdys);
+
 
 //        settings = getSharedPreferences("settings", MODE_PRIVATE);
 
@@ -106,7 +123,7 @@ public class My_Topup extends Fragment {
             public void onClick(View view, int position) {
                 Topup_geterseter movie = joblist.get(position);
 
-                amt=movie.getPackCost();
+                amt = movie.getPackCost();
 //                amt="1";
 
                 String id = session.getUserID();
@@ -123,6 +140,35 @@ public class My_Topup extends Fragment {
             }
         }));
 
+        if (session.getSubcription().equalsIgnoreCase("active")) {
+            subscriptionlayout.setVisibility(View.VISIBLE);
+            package_nm.setText("Package : " + session.getPackageID());
+
+            String remds = session.getRemainigDay();
+            if(remds.contains("+")){
+                remds = remds.replace("+", "");
+            }
+
+            remainingdys.setText("Remaining Days : " + remds);
+
+            try {
+                DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                DateFormat targetFormat = new SimpleDateFormat("d MMM yyyy");
+                Date date = null;
+                date = originalFormat.parse(session.getExpireDay());
+                String formattedDate = targetFormat.format(date);
+                expirydt.setText("Expiry Date : " + formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            subscriptionlayout.setVisibility(View.VISIBLE);
+            package_nm.setText("Package : NA");
+            expirydt.setVisibility(View.GONE);
+            remainingdys.setVisibility(View.GONE);
+        }
+
         getPackageList();
 //        selectSandBoxEnv();
         selectProdEnv();
@@ -131,93 +177,93 @@ public class My_Topup extends Fragment {
 
     }
 
-        public  void   getPackageList() {
+    public void getPackageList() {
 
-            String url = "https://egknow.com/service-web/webservice.php?method=getPackageList" ;
-            Log.d("RanjeetUrlCheck", url);
-
-            progressDialog.showDialog();
-
-            Log.d("Receive", url);
-
-            final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("Ranjeetregister", response.toString());
-                            String REsult = response.toString();
-                            //    pDialog.dismiss();
-                            progressDialog.hideDialog();
-
-                            try {
-                                JSONObject jsonObjMain = new JSONObject(REsult);
-                                String statuse = jsonObjMain.getString("success");
-                                if(statuse.equals("true")) {
-                                    JSONArray jsonArray = jsonObjMain.getJSONArray("packageList");
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                                        JSONObject jsonSubJson = jsonArray.getJSONObject(i);
-                                        String packId = jsonSubJson.getString("pac_id");
-                                        String packname = jsonSubJson.getString("pac_name");
-                                        String packDays = jsonSubJson.getString("pac_days");
-                                        String packCost = jsonSubJson.getString("pac_cost");
-
-
-                                        joblist.add(new Topup_geterseter(packId, packname, packDays, packCost));
-                                    }
-
-
-                                    TopupAdapter adapter = new TopupAdapter(joblist, My_Topup.this);
-                                    recyclerView.setHasFixedSize(true);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                    recyclerView.setAdapter(adapter);
-                                }
-                            } catch (Exception r) {
-                                progressDialog.hideDialog();
-                                Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
-                                Toast.makeText(getActivity(), "Successfully Logined", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.hideDialog();
-                    Log.d("Ranjeet", "Error: " + error.getMessage());
-                    // hide the progress dialog
-
-        //               getValues();
-                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-
-                        Toast.makeText(getActivity(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
-                        // ...
-                    }
-                }
-            });
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
-                    50000,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, url);
-        }
-
-    public void getTransactionid(String userid, String packageid, String amount) {
-        String a = "{\"user_id\":\"";
-        String b = "\", \"package_id\":\"";
-        String c = "\", \"amount\":\"";
-        String d = "\"}";
-        String url = "https://egknow.com/service-web/webservice.php?method=generateTransactionId&data=" + a + userid + b + packageid + c +amount + d;
+        String url = "https://egknow.com/service-web/webservice.php?method=getPackageList";
         Log.d("RanjeetUrlCheck", url);
 
         progressDialog.showDialog();
 
         Log.d("Receive", url);
 
-        if(url.contains(" ")){
+        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Ranjeetregister", response.toString());
+                        String REsult = response.toString();
+                        //    pDialog.dismiss();
+                        progressDialog.hideDialog();
+
+                        try {
+                            JSONObject jsonObjMain = new JSONObject(REsult);
+                            String statuse = jsonObjMain.getString("success");
+                            if (statuse.equals("true")) {
+                                JSONArray jsonArray = jsonObjMain.getJSONArray("packageList");
+                                for (int i = 0; i < jsonArray.length(); i++) {
+
+                                    JSONObject jsonSubJson = jsonArray.getJSONObject(i);
+                                    String packId = jsonSubJson.getString("pac_id");
+                                    String packname = jsonSubJson.getString("pac_name");
+                                    String packDays = jsonSubJson.getString("pac_days");
+                                    String packCost = jsonSubJson.getString("pac_cost");
+
+
+                                    joblist.add(new Topup_geterseter(packId, packname, packDays, packCost));
+                                }
+
+
+                                TopupAdapter adapter = new TopupAdapter(joblist, My_Topup.this);
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                recyclerView.setAdapter(adapter);
+                            }
+                        } catch (Exception r) {
+                            progressDialog.hideDialog();
+                            Log.d("Ranjeetkumar", "ranjeet Error" + r.toString());
+                            Toast.makeText(getActivity(), "Successfully Logined", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.hideDialog();
+                Log.d("Ranjeet", "Error: " + error.getMessage());
+                // hide the progress dialog
+
+                //               getValues();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getActivity(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+                    // ...
+                }
+            }
+        });
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, url);
+    }
+
+    public void getTransactionid(String userid, String packageid, String amount) {
+        String a = "{\"user_id\":\"";
+        String b = "\", \"package_id\":\"";
+        String c = "\", \"amount\":\"";
+        String d = "\"}";
+        String url = "https://egknow.com/service-web/webservice.php?method=generateTransactionId&data=" + a + userid + b + packageid + c + amount + d;
+        Log.d("RanjeetUrlCheck", url);
+
+        progressDialog.showDialog();
+
+        Log.d("Receive", url);
+
+        if (url.contains(" ")) {
             url = url.replace(" ", "%20");
-        }else{
-            url=url;
+        } else {
+            url = url;
         }
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
@@ -239,9 +285,7 @@ public class My_Topup extends Fragment {
 
                                 launchPayUMoneyFlow();
 
-                            }
-
-                            else{
+                            } else {
                                 String erro_msg = jsonObjMain.getString("err_msg");
                                 Toast.makeText(getActivity(), erro_msg, Toast.LENGTH_SHORT).show();
                             }
@@ -335,8 +379,6 @@ public class My_Topup extends Fragment {
 //    protected int getLayoutResource() {
 //        return R.viewquiz.activity_main;
 //    }
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -448,7 +490,7 @@ public class My_Topup extends Fragment {
             /*
              * Hash should always be generated from your server side.
              * */
-                generateHashFromServer(mPaymentParams);
+            generateHashFromServer(mPaymentParams);
 
             /*            *//**
              * Do not use below code when going live

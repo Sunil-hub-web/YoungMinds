@@ -32,6 +32,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.egk.adapter.Notification_Adapter;
 import com.egk.extra.AppSingleton;
+import com.egk.extra.Constants;
 import com.egk.extra.SessionManager;
 import com.egk.fragment.BasicGk;
 import com.egk.fragment.ChangePassword;
@@ -65,7 +66,7 @@ public class Egk_nav extends AppCompatActivity
     SessionManager sesion;
 
     public static TextView headtitle, noticount;
-    public static ImageView notification,egk_logo;
+    public static ImageView notification, egk_logo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,18 +74,18 @@ public class Egk_nav extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sesion = new SessionManager(getApplicationContext());
-        notification=(ImageView)findViewById(R.id.notification);
-        egk_logo=(ImageView)findViewById(R.id.egk_logo);
+        sesion = new SessionManager(this);
+        notification = (ImageView) findViewById(R.id.notification);
+        egk_logo = (ImageView) findViewById(R.id.egk_logo);
         headtitle = (TextView) findViewById(R.id.title);
         noticount = (TextView) findViewById(R.id.noticount);
 
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm=getSupportFragmentManager();
-                My_Notifications fragment= new My_Notifications();
-                fm.beginTransaction().replace(R.id.screen_area,fragment).commit();
+                FragmentManager fm = getSupportFragmentManager();
+                My_Notifications fragment = new My_Notifications();
+                fm.beginTransaction().replace(R.id.screen_area, fragment).commit();
                 headtitle.setText("Notifications");
                 egk_logo.setVisibility(View.GONE);
             }
@@ -102,7 +103,6 @@ public class Egk_nav extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
         navigationView.setItemIconTintList(null);
-
 
 
 //        headtitle.setText("Home");
@@ -130,8 +130,7 @@ public class Egk_nav extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
 
-        }
-        else if (currentFragment instanceof Todays) {
+        } else if (currentFragment instanceof Todays) {
 
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
@@ -139,8 +138,7 @@ public class Egk_nav extends AppCompatActivity
 
             //       getFragmentValue( new MyProfileFragment());
 
-        }
-        else if (currentFragment instanceof GkItemCategory) {
+        } else if (currentFragment instanceof GkItemCategory) {
 
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
@@ -184,8 +182,7 @@ public class Egk_nav extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
-        }
-        else if (currentFragment instanceof ChangePassword) {
+        } else if (currentFragment instanceof ChangePassword) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
@@ -194,9 +191,7 @@ public class Egk_nav extends AppCompatActivity
             startActivity(intent);
             finish();
 
-        }
-
-        else if (currentFragment instanceof PrivacyPolicyFragment) {
+        } else if (currentFragment instanceof PrivacyPolicyFragment) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
@@ -206,45 +201,38 @@ public class Egk_nav extends AppCompatActivity
             startActivity(intent);
             finish();
 
-        }else if (currentFragment instanceof Report) {
+        } else if (currentFragment instanceof Report) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }else if (currentFragment instanceof Glossary) {
+        } else if (currentFragment instanceof Glossary) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }
-        else if (currentFragment instanceof MatchPoint) {
+        } else if (currentFragment instanceof MatchPoint) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }
-        else if (currentFragment instanceof Recharge_point) {
+        } else if (currentFragment instanceof Recharge_point) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }
-        else if (currentFragment instanceof BasicGk)
-        {
+        } else if (currentFragment instanceof BasicGk) {
 
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }
-
-        else if (currentFragment instanceof Upcoming_Exam) {
+        } else if (currentFragment instanceof Upcoming_Exam) {
             Intent intent = new Intent(getApplicationContext(), Egk_nav.class);
             startActivity(intent);
             finish();
 
-        }
-        else if (exit) {
+        } else if (exit) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -298,44 +286,65 @@ public class Egk_nav extends AppCompatActivity
             headtitle.setText("");
             egk_logo.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_today) {
-            headtitle.setText("Today's");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new Todays();
-        }
-        else if (id == R.id.nav_gk) {
-            headtitle.setText("Category GK");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new GkItemCategory();
-        }
-        else if (id == R.id.nav_test_paper) {
-            headtitle.setText("Sample Papers");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new PreviousTestPAper_Fragment();
+            if (sesion.getToday().equalsIgnoreCase("1") || (sesion.getToday().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Today's");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new Todays();
+            } else {
 
-        }
-        else if (id == R.id.nav_upcoming) {
-            headtitle.setText("Upcoming Exam");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new Upcoming_Exam();
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_gk) {
+            if (sesion.getCategogryGK().equalsIgnoreCase("1") || (sesion.getCategogryGK().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Category GK");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new GkItemCategory();
+            } else {
 
-        }
-        else if (id == R.id.nav_basicgk) {
-            headtitle.setText("Basic GK");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new BasicGk();
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_test_paper) {
+            if (sesion.getSamplePaper().equalsIgnoreCase("1") || (sesion.getSamplePaper().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Sample Papers");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new PreviousTestPAper_Fragment();
+            } else {
 
-        }
-        else if (id == R.id.nav_rechargepoint) {
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_upcoming) {
+            if (sesion.getUpcomingExam().equalsIgnoreCase("1") || (sesion.getUpcomingExam().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Upcoming Exam");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new Upcoming_Exam();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_basicgk) {
+            if (sesion.getBasicGK().equalsIgnoreCase("1") || (sesion.getBasicGK().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Basic GK");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new BasicGk();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_rechargepoint) {
             headtitle.setText("Recharge Point");
             egk_logo.setVisibility(View.GONE);
             fragment = new Recharge_point();
 
-        }else if (id == R.id.nav_eqkquiz) {
-            headtitle.setText("Egk Quiz");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new EgkQuiz();
+        } else if (id == R.id.nav_eqkquiz) {
+            if (sesion.getQuiz().equalsIgnoreCase("1") || (sesion.getQuiz().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Egk Quiz");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new EgkQuiz();
+            } else {
 
-        }  else if (id == R.id.nav_offers) {
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_offers) {
             headtitle.setText("My Offers");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Offers();
@@ -344,57 +353,66 @@ public class Egk_nav extends AppCompatActivity
             headtitle.setText("Notifications");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Notifications();
-        }
+        } else if (id == R.id.nav_match_point) {
+            if (sesion.getMatchPoint().equalsIgnoreCase("1") || (sesion.getMatchPoint().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Match Point");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new MatchPoint();
+            } else {
 
-         else if (id == R.id.nav_match_point) {
-            headtitle.setText("Match Point");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new MatchPoint();
-        }
-        else if (id == R.id.nav_transactions) {
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_transactions) {
             headtitle.setText("Transactions");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Transaction();
-        }
-         else if (id == R.id.nav_topup) {
+        } else if (id == R.id.nav_topup) {
             headtitle.setText("Top Up");
             egk_logo.setVisibility(View.GONE);
             fragment = new My_Topup();
         } else if (id == R.id.nav_monthly_gk) {
-            headtitle.setText("Monthly GK");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new MonthlyGk();
-        }
-        else if (id == R.id.nav_report) {
-            headtitle.setText("Report");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new Report();
-        }
-        else if (id == R.id.nav_glossary) {
-            headtitle.setText("Glossary");
-            egk_logo.setVisibility(View.GONE);
-            fragment = new Glossary();
-        }
+            if (sesion.getMonthlyGk().equalsIgnoreCase("1") || (sesion.getMonthlyGk().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Monthly GK");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new MonthlyGk();
+            } else {
 
-        else if (id == R.id.nav_profile) {
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_report) {
+            if (sesion.getReports().equalsIgnoreCase("1") || (sesion.getReports().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Report");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new Report();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_glossary) {
+            if (sesion.getGlossary().equalsIgnoreCase("1") || (sesion.getGlossary().equalsIgnoreCase("0") && sesion.getSubcription().equalsIgnoreCase("active"))) {
+                headtitle.setText("Glossary");
+                egk_logo.setVisibility(View.GONE);
+                fragment = new Glossary();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Please subscribe package to see all modules", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_profile) {
             headtitle.setText("Profile");
             egk_logo.setVisibility(View.GONE);
             fragment = new MyProfile();
 
-        }
-       else if (id == R.id.nav_changepass) {
+        } else if (id == R.id.nav_changepass) {
             headtitle.setText("Change Password");
             egk_logo.setVisibility(View.GONE);
-                fragment = new ChangePassword();
+            fragment = new ChangePassword();
 
-        }
-
-       else if (id == R.id.nav_share) {
-            Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+        } else if (id == R.id.nav_share) {
+            Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Insert Subject here");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Insert Subject here");
             String app_url = "https://play.google.com/store/apps/details?id=com.egk.egk&hl=en";
-            shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,app_url);
+            shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, app_url);
             startActivity(Intent.createChooser(shareIntent, "Share via"));
 
         } else if (id == R.id.nav_send_privacy) {
@@ -458,7 +476,7 @@ public class Egk_nav extends AppCompatActivity
 
     public void getNotification() {
 
-        String url = "https://egknow.com/service-web/webservice.php?method=getusrNotifCount&data={\"user_id\":\""+sesion.getUserID()+"\"}";
+        String url = "https://egknow.com/service-web/webservice.php?method=getusrNotifCount&data={\"user_id\":\"" + sesion.getUserID() + "\"}";
 
         Log.d("notification", url);
 
@@ -473,11 +491,11 @@ public class Egk_nav extends AppCompatActivity
                         try {
                             JSONObject jsonObjMain = new JSONObject(REsult);
                             String statuse = jsonObjMain.getString("success");
-                            if(statuse.equalsIgnoreCase("true")){
+                            if (statuse.equalsIgnoreCase("true")) {
                                 String notification_cnt = jsonObjMain.getString("notification_cnt");
-                                if(notification_cnt.equalsIgnoreCase("0")){
+                                if (notification_cnt.equalsIgnoreCase("0")) {
                                     noticount.setText("");
-                                }else{
+                                } else {
                                     noticount.setText(notification_cnt);
                                 }
                             }
@@ -519,4 +537,6 @@ public class Egk_nav extends AppCompatActivity
         super.onResume();
         getNotification();
     }
+
+
 }

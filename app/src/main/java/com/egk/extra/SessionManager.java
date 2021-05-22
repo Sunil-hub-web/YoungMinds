@@ -32,6 +32,20 @@ public class SessionManager {
     private static final String UserCity="usercity";
     private static final String SessionId="sessionid";
     private static final String Photo="Photo";
+    private static final String Subcription="Subcription";
+    private static final String PackageID="PackageID";
+    private static final String RemainigDay="RemainigDay";
+    private static final String ExpireDay="ExpireDay";
+    private static final String Today="Today";
+    private static final String MonthlyGk="MonthlyGk";
+    private static final String CategogryGK="CategogryGK";
+    private static final String MatchPoint="MatchPoint";
+    private static final String Glossary="Glossary";
+    private static final String Reports="Reports";
+    private static final String SamplePaper="SamplePaper";
+    private static final String UpcomingExam="UpcomingExam";
+    private static final String BasicGK="BasicGK";
+    private static final String Quiz="Quiz";
 
 
     public SessionManager(Context context){
@@ -40,9 +54,135 @@ public class SessionManager {
         sharedprefernce = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor=sharedprefernce.edit();
 
+    }
 
+
+    public  String getSubcription() {
+        return sharedprefernce.getString(Subcription,"");
+    }
+    public void setSubcription(String subcription ){
+        editor.putString(Subcription,subcription);
+        editor.commit();
 
     }
+
+    public  String getPackageID() {
+        return sharedprefernce.getString(PackageID,"");
+    }
+    public void setPackageID(String packageid ){
+        editor.putString(PackageID,packageid);
+        editor.commit();
+
+    }
+
+    public  String getRemainigDay() {
+        return sharedprefernce.getString(RemainigDay,"");
+    }
+    public void setRemainigDay(String remainigday ){
+        editor.putString(RemainigDay,remainigday);
+        editor.commit();
+
+    }
+
+    public  String getExpireDay() {
+        return sharedprefernce.getString(ExpireDay,"");
+    }
+    public void setExpireDay(String expireday ){
+        editor.putString(ExpireDay,expireday);
+        editor.commit();
+
+    }
+
+    public  String getToday() {
+        return sharedprefernce.getString(Today,"");
+    }
+    public void setToday(String today ){
+        editor.putString(Today,today);
+        editor.commit();
+
+    }
+
+    public  String getMonthlyGk() {
+        return sharedprefernce.getString(MonthlyGk,"");
+    }
+    public void setMonthlyGk(String monthlygk ){
+        editor.putString(MonthlyGk,monthlygk);
+        editor.commit();
+
+    }
+
+    public  String getCategogryGK() {
+        return sharedprefernce.getString(CategogryGK,"");
+    }
+    public void setCategogryGK(String categogrygk ){
+        editor.putString(CategogryGK,categogrygk);
+        editor.commit();
+
+    }
+
+    public  String getMatchPoint() {
+        return sharedprefernce.getString(MatchPoint,"");
+    }
+    public void setMatchPoint(String matchpoint ){
+        editor.putString(MatchPoint,matchpoint);
+        editor.commit();
+
+    }
+
+    public  String getGlossary() {
+        return sharedprefernce.getString(Glossary,"");
+    }
+    public void setGlossary(String glossary ){
+        editor.putString(Glossary,glossary);
+        editor.commit();
+
+    }
+
+    public  String getReports() {
+        return sharedprefernce.getString(Reports,"");
+    }
+    public void setReports(String reports ){
+        editor.putString(Reports,reports);
+        editor.commit();
+
+    }
+
+    public  String getSamplePaper() {
+        return sharedprefernce.getString(SamplePaper,"");
+    }
+    public void setSamplePaper(String samplepaper ){
+        editor.putString(SamplePaper,samplepaper);
+        editor.commit();
+
+    }
+
+    public  String getUpcomingExam() {
+        return sharedprefernce.getString(UpcomingExam,"");
+    }
+    public void setUpcomingExam(String upcomingexam ){
+        editor.putString(UpcomingExam,upcomingexam);
+        editor.commit();
+
+    }
+
+    public  String getBasicGK() {
+        return sharedprefernce.getString(BasicGK,"");
+    }
+    public void setBasicGK(String basicgk ){
+        editor.putString(BasicGK,basicgk);
+        editor.commit();
+
+    }
+
+    public  String getQuiz() {
+        return sharedprefernce.getString(Quiz,"");
+    }
+    public void setQuiz(String quiz ){
+        editor.putString(Quiz,quiz);
+        editor.commit();
+
+    }
+
 
     public Boolean isLogin(){
         return sharedprefernce.getBoolean(IS_LOGIN, false);
@@ -66,7 +206,6 @@ public class SessionManager {
 
 
     }
-
     public String getUserID(){
 
         return  sharedprefernce.getString(User_Id,"DEFAULT");
@@ -89,8 +228,7 @@ public class SessionManager {
         return sharedprefernce.getString(USERPHONENUMBER,"DEFAULT");
     }
 
-    public void setUserEmail(String name)
-    {
+    public void setUserEmail(String name) {
         editor.putString(USEREMAIL,name);
         editor.commit();
     }
@@ -98,8 +236,7 @@ public class SessionManager {
         return sharedprefernce.getString(USEREMAIL,"DEFAULT");
     }
 
-    public void setUSERcity(String ucity)
-    {
+    public void setUSERcity(String ucity) {
         editor.putString(UserCity,ucity);
         editor.commit();
     }
@@ -113,7 +250,6 @@ public class SessionManager {
         editor.commit();
 
     }
-
     public String getUserPassword() {
         return sharedprefernce.getString(userPassword,"DEFAULT");
     }
@@ -136,6 +272,7 @@ public class SessionManager {
         editor.commit();
 
     }
+
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.clear();
